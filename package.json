@@ -2,12 +2,37 @@
   "name": "design-system-starter",
   "version": "0.1.0",
   "description": "Starter réutilisable de design system : tokens DTCG générés pour le web, Android et iOS",
+  "private": true,
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/lib/types/index.d.ts",
+      "import": "./dist/lib/index.js"
+    },
+    "./styles.css": "./dist/lib/styles.css",
+    "./tokens/*": "./dist/web/*",
+    "./package.json": "./package.json"
+  },
+  "peerDependencies": {
+    "lucide-react": "^1.52.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
   "scripts": {
     "test": "node scripts/check-tokens.mjs",
     "build:tokens": "npm test && node build-tokens.mjs",
     "typecheck": "tsc",
     "storybook": "npm run build:tokens && storybook dev --port 6006 --host 0.0.0.0 --no-open",
-    "build:storybook": "npm run build:tokens && storybook build"
+    "build:storybook": "npm run build:tokens && storybook build",
+    "build:lib": "vite build --config vite.lib.config.ts && tsc -p tsconfig.build.json",
+    "build": "npm run build:tokens && npm run build:lib",
+    "prepack": "npm run build"
   },
   "keywords": [],
   "author": "",
@@ -18,14 +43,12 @@
     "@storybook/react-vite": "^10.6.1",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
+    "lucide-react": "^1.52.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
     "storybook": "^10.6.1",
     "style-dictionary": "^5.6.0",
     "typescript": "^7.0.2",
     "vite": "^8.3.3"
-  },
-  "dependencies": {
-    "lucide-react": "^1.52.0",
-    "react": "^19.3.0",
-    "react-dom": "^19.3.0"
   }
 }

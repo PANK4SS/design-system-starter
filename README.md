@@ -17,6 +17,7 @@ docker compose run --rm node npm install          # installer les dépendances
 docker compose run --rm node npm test             # vérifier les règles des tokens
 docker compose run --rm node npm run build:tokens # vérifier PUIS générer dist/
 docker compose run --rm node npm run typecheck    # vérifier les types TypeScript
+docker compose run --rm node npm run build        # tokens + librairie installable (dist/lib)
 docker compose up storybook                       # Storybook sur http://localhost:6006
 ```
 
@@ -120,6 +121,31 @@ Text("Bonjour")
 - **Code natif non compilé ici** : le Kotlin et le Swift générés ne sont pas compilés dans ce dépôt (il faudrait Android Studio / Xcode). C'est le CI de chaque app qui le compile en important `dist/`.
 - **Typographie en CSS** : chaque style est éclaté en 5 variables (`-font-family`, `-font-size`, `-font-weight`, `-line-height`, `-letter-spacing`), car la propriété raccourcie `font` ne sait pas porter le `letter-spacing`.
 - Le warning `filtered out token references` sur `dark.css` est **attendu** : les couleurs dark pointent vers des primitifs définis dans `light.css`, qui doit donc toujours être chargé.
+
+## Utiliser le design system dans un projet
+
+Le paquet se construit avec `npm run build` (tokens + librairie dans `dist/`). Pour l'installer dans une app :
+
+```bash
+docker compose run --rm node npm pack          # produit design-system-starter-0.1.0.tgz
+# dans l'app :
+npm install ../chemin/vers/design-system-starter-0.1.0.tgz lucide-react
+```
+
+(ou le publier sur un registre npm privé, GitHub Packages / GitLab Package Registry.)
+
+```tsx
+// Une seule fois, à la racine de l'app : tokens + styles des composants + styles de base
+import 'design-system-starter/styles.css';
+
+import { Button, Input, ToastProvider, useToast } from 'design-system-starter';
+import { Search } from 'lucide-react';
+```
+
+- **Thème sombre** : poser `data-theme="dark"` sur `<html>`.
+- **Polices** : l'app charge elle-même Inter et Orbitron (ex. Google Fonts), le design system ne fournit que leurs noms.
+- **Dépendances** : `react`, `react-dom` (19+) et `lucide-react` sont des *peerDependencies* : c'est l'app qui les installe, pour qu'il n'y ait qu'un seul React.
+- Les fichiers de tokens restent accessibles : `design-system-starter/tokens/css/light.css`, `…/tokens/js/light.js`.
 
 ## Composants (React)
 

@@ -1,0 +1,19 @@
+/* Tout le CSS du design system en un fichier : les tokens (générés par build:tokens) + les composants. */
+@import '../dist/web/css/light.css';
+@import '../dist/web/css/dark.css';
+
+/* Styles de base : la page suit le thème (fond, texte, police, éléments natifs du navigateur). */
+:root {
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  background: var(--color-background-page);
+  color: var(--color-text-default);
+  font-family: var(--font-family-body);
+}
