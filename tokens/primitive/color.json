@@ -14,7 +14,8 @@
     },
     "white": { "$value": "#FFFFFF", "$type": "color" },
     "green": {
-      "500": { "$value": "#13B704", "$type": "color" }
+      "500": { "$value": "#13B704", "$type": "color" },
+      "700": { "$value": "#0D7F03", "$type": "color" }
     },
     "red": {
       "500": { "$value": "#D21500", "$type": "color" }
