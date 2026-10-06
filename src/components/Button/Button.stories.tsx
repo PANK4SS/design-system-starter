@@ -12,7 +12,7 @@ const ArrowIcon = () => (
 );
 
 const meta = {
-  title: 'Composants/Button',
+  title: 'Actions/Button',
   component: Button,
   args: { children: 'Enregistrer', onClick: fn() },
   argTypes: {
