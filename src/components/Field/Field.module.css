@@ -1,0 +1,58 @@
+/*
+ * Mise en page commune des champs : label, contrôle, aide, erreur.
+ * Uniquement des tokens sémantiques : les couleurs suivent le thème toutes seules.
+ */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+  font-family: var(--font-family-body);
+}
+
+.label {
+  color: var(--color-text-default);
+  font-size: var(--typography-label-md-font-size);
+  font-weight: var(--typography-label-md-font-weight);
+  line-height: var(--typography-label-md-line-height);
+}
+
+.required {
+  color: var(--color-feedback-danger);
+}
+
+/* ── Aide et erreur ─────────────────────────────────────────────────────── */
+.message {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-1);
+  margin: 0;
+  font-size: var(--typography-body-sm-font-size);
+  line-height: var(--typography-body-sm-line-height);
+}
+
+.hint {
+  color: var(--color-text-subtle);
+}
+
+.error {
+  color: var(--color-feedback-danger);
+}
+
+/* Aligne l'icône sur la première ligne de texte */
+.messageIcon {
+  margin-block-start: calc((1lh - var(--icon-size-sm)) / 2);
+}
+
+/* Caché à l'écran, mais toujours lu par les lecteurs d'écran */
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}

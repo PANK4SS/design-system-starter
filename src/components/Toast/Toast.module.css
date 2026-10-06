@@ -1,0 +1,55 @@
+/* Zone fixe en bas à droite, au-dessus de tout le reste (sauf les infobulles) */
+.region {
+  position: fixed;
+  right: var(--space-4);
+  bottom: var(--space-4);
+  z-index: var(--layer-toast);
+  width: min(calc(var(--space-16) * 6), calc(100% - 2 * var(--space-4)));
+  /* La zone elle-même ne bloque pas les clics sur la page en dessous */
+  pointer-events: none;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.toast {
+  pointer-events: auto;
+  animation: enter var(--duration-normal) var(--easing-decelerate);
+}
+
+/* Reprend l'apparence d'Alert, avec une ombre : le toast flotte au-dessus de la page */
+.alert {
+  box-shadow: var(--shadow-lg);
+}
+
+.closing {
+  animation: exit var(--duration-normal) var(--easing-accelerate) forwards;
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(var(--space-4));
+  }
+}
+
+@keyframes exit {
+  to {
+    opacity: 0;
+    transform: translateX(var(--space-8));
+  }
+}
+
+/* Mouvement réduit : les toasts apparaissent et disparaissent sans animation */
+@media (prefers-reduced-motion: reduce) {
+  .toast,
+  .closing {
+    animation: none;
+  }
+}

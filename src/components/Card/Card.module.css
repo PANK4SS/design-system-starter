@@ -1,0 +1,207 @@
+/*
+ * La carte fournit la marge intérieure (--_padding) et l'espacement (--_gap) à ses sous-parties.
+ * Les variables qui commencent par --_ sont « privées » : variantes et tailles les remplissent.
+ */
+.card {
+  /* Sert de repère au lien étiré (CardLink) qui couvre toute la carte */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--_gap);
+  padding: var(--_padding);
+
+  border: 1px solid var(--_border, transparent);
+  border-radius: var(--radius-lg);
+  background: var(--_bg);
+  box-shadow: var(--_shadow, none);
+  color: var(--color-text-default);
+  font-family: var(--font-family-body);
+}
+
+/* ── Variantes ──────────────────────────────────────────────────────────── */
+.outlined {
+  --_bg: var(--color-background-page);
+  --_border: var(--color-border-default);
+  --_border-hover: var(--color-border-strong);
+  --_shadow-hover: var(--shadow-sm);
+}
+
+.elevated {
+  /* « raised » : blanc en clair (l'ombre suffit), surface claire en sombre (une ombre ne s'y voit pas) */
+  --_bg: var(--color-background-raised);
+  --_shadow: var(--shadow-md);
+  --_shadow-hover: var(--shadow-lg);
+}
+
+/* ── Marges intérieures ─────────────────────────────────────────────────── */
+.padding-none {
+  --_padding: 0;
+  --_gap: var(--space-4);
+}
+
+.padding-sm {
+  --_padding: var(--space-4);
+  --_gap: var(--space-3);
+}
+
+.padding-md {
+  --_padding: var(--space-6);
+  --_gap: var(--space-4);
+}
+
+.padding-lg {
+  --_padding: var(--space-8);
+  --_gap: var(--space-6);
+}
+
+/* ── Carte interactive ──────────────────────────────────────────────────── */
+.interactive {
+  transition:
+    box-shadow var(--duration-normal) var(--easing-standard),
+    border-color var(--duration-normal) var(--easing-standard);
+}
+
+.interactive:hover {
+  border-color: var(--_border-hover, transparent);
+  box-shadow: var(--_shadow-hover);
+}
+
+/* ── En-tête ────────────────────────────────────────────────────────────── */
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.headings {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--font-size-400);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--font-line-height-tight);
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--color-text-subtle);
+  font-size: var(--typography-body-sm-font-size);
+  line-height: var(--typography-body-sm-line-height);
+}
+
+/* Les actions passent AU-DESSUS du lien étiré pour rester cliquables */
+.actions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-shrink: 0;
+  gap: var(--space-2);
+}
+
+/* ── Corps et pied ──────────────────────────────────────────────────────── */
+.body {
+  font-size: var(--typography-body-md-font-size);
+  line-height: var(--typography-body-md-line-height);
+}
+
+.body > :first-child {
+  margin-top: 0;
+}
+
+.body > :last-child {
+  margin-bottom: 0;
+}
+
+.footer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.align-start {
+  justify-content: flex-start;
+}
+
+.align-end {
+  justify-content: flex-end;
+}
+
+.align-between {
+  justify-content: space-between;
+}
+
+/* ── Média : touche les bords de la carte en annulant sa marge intérieure ── */
+.media {
+  display: block;
+  width: calc(100% + 2 * var(--_padding));
+  max-width: none;
+  margin-inline: calc(-1 * var(--_padding));
+  object-fit: cover;
+}
+
+.media:first-child {
+  margin-top: calc(-1 * var(--_padding));
+  border-top-left-radius: var(--radius-lg);
+  border-top-right-radius: var(--radius-lg);
+}
+
+/* ── Lien étiré ─────────────────────────────────────────────────────────── */
+.link {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Le pseudo-élément couvre toute la carte : un clic n'importe où active le lien */
+.link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-lg);
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+/*
+ * Le contour de focus est DÉPLACÉ sur le pseudo-élément (il entoure toute la carte),
+ * il n'est pas supprimé : l'utilisateur clavier voit toujours où il se trouve.
+ */
+.link:focus-visible {
+  outline: none;
+}
+
+.link:focus-visible::after {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+/* Remise à zéro du style natif quand le lien étiré est un <button> */
+.linkButton {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+.linkButton:disabled {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interactive {
+    transition: none;
+  }
+}

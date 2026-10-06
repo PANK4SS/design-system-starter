@@ -1,0 +1,43 @@
+/*
+ * La boîte (bordure, tailles, états) vient de Field/control.module.css.
+ * Ici : seulement ce qui est propre à Input.
+ */
+
+/* Bouton « afficher / masquer le mot de passe » */
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  /* Carré qui suit la taille du champ, collé à --space-1 du bord droit */
+  width: calc(var(--_height) - var(--space-2));
+  height: calc(var(--_height) - var(--space-2));
+  margin-inline-end: calc(var(--space-1) - var(--_padding-x));
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-icon-subtle);
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--easing-standard);
+}
+
+.toggle:hover:not(:disabled) {
+  background: var(--color-action-subtle-hover);
+  color: var(--color-icon-default);
+}
+
+.toggle:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+.toggle:disabled {
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toggle {
+    transition: none;
+  }
+}

@@ -1,0 +1,107 @@
+/*
+ * L'<input> natif EST le rail (appearance: none) ; la pastille est un <span> posé par-dessus,
+ * qui glisse vers la droite quand l'input est coché.
+ * Dimensions : rail de --space-10 × --space-6, pastille de --space-4 avec une marge de --space-1.
+ */
+.switch {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  font-family: var(--font-family-body);
+}
+
+.track {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  /* Centre le rail sur la première ligne du libellé */
+  margin-block-start: calc((var(--typography-body-md-font-size) * var(--typography-body-md-line-height) - var(--space-6)) / 2);
+}
+
+.input {
+  appearance: none;
+  width: var(--space-10);
+  height: var(--space-6);
+  margin: 0;
+  border-radius: var(--radius-full);
+  background: var(--_track, var(--color-border-strong));
+  cursor: pointer;
+  transition: background-color var(--duration-normal) var(--easing-standard);
+}
+
+.input:hover:not(:disabled) {
+  --_track: var(--color-text-subtle);
+}
+
+.input:checked,
+.input:hover:checked:not(:disabled) {
+  --_track: var(--color-control-checked);
+}
+
+.input:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+.input:disabled {
+  cursor: not-allowed;
+}
+
+.thumb {
+  position: absolute;
+  inset-block-start: var(--space-1);
+  inset-inline-start: var(--space-1);
+  width: var(--space-4);
+  height: var(--space-4);
+  border-radius: var(--radius-full);
+  background: var(--color-background-page);
+  box-shadow: var(--shadow-sm);
+  pointer-events: none;
+  transition:
+    transform var(--duration-normal) var(--easing-standard),
+    background-color var(--duration-normal) var(--easing-standard);
+}
+
+.input:checked + .thumb {
+  background: var(--color-control-on-checked);
+  transform: translateX(var(--space-4));
+}
+
+/* En écriture de droite à gauche, la pastille glisse vers la gauche */
+.input:checked:dir(rtl) + .thumb {
+  transform: translateX(calc(var(--space-4) * -1));
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.label {
+  color: var(--color-text-default);
+  font-size: var(--typography-body-md-font-size);
+  line-height: var(--typography-body-md-line-height);
+  cursor: pointer;
+}
+
+/*
+ * Désactivé : on estompe le contrôle et son libellé, mais PAS la description,
+ * qui reste lisible (elle explique souvent pourquoi le choix est indisponible).
+ */
+.disabled .track,
+.disabled .label {
+  opacity: var(--opacity-disabled);
+}
+
+.disabled .label {
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .input,
+  .thumb {
+    transition: none;
+  }
+}

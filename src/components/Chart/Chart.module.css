@@ -1,0 +1,203 @@
+/*
+ * Styles partagés des graphiques. Uniquement des tokens : les couleurs de séries viennent de
+ * --color-chart-categorical-1…5, la grille de --color-chart-grid, les textes d'axe de
+ * --color-chart-axis. Le thème clair/sombre suit donc data-theme sans rien faire.
+ *
+ * Variables privées :
+ *   --_series  : couleur de la série (remplie par .slot-1…5 / .slot-other)
+ *   --_surface : couleur du fond sous le graphique (anneau autour des points). Surchargez-la
+ *                si le graphique est posé sur une autre surface.
+ */
+
+.figure {
+  --_surface: var(--color-background-page);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  color: var(--color-text-default);
+  font-family: var(--font-family-body);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.title {
+  font-family: var(--typography-label-md-font-family);
+  font-size: var(--typography-body-md-font-size);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--typography-body-md-line-height);
+}
+
+.description {
+  color: var(--color-text-subtle);
+  font-size: var(--typography-body-sm-font-size);
+  line-height: var(--typography-body-sm-line-height);
+}
+
+/* ── Couleurs de séries : ordre FIXE, jamais recyclé ───────────────────── */
+.slot-1 { --_series: var(--color-chart-categorical-1); }
+.slot-2 { --_series: var(--color-chart-categorical-2); }
+.slot-3 { --_series: var(--color-chart-categorical-3); }
+.slot-4 { --_series: var(--color-chart-categorical-4); }
+.slot-5 { --_series: var(--color-chart-categorical-5); }
+/* « Autre » : gris de mise en retrait, jamais une 6e teinte */
+.slot-other { --_series: var(--color-chart-other); }
+
+/* ── Légende (le texte reste en couleur de texte, jamais en couleur de série) ── */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--color-text-subtle);
+  font-size: var(--typography-body-sm-font-size);
+  line-height: var(--typography-body-sm-line-height);
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.keyRect {
+  flex-shrink: 0;
+  width: var(--space-3);
+  height: var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--_series);
+}
+
+.keyLine {
+  flex-shrink: 0;
+  width: var(--space-4);
+  height: 2px;
+  border-radius: var(--radius-full);
+  background: var(--_series);
+}
+
+/* ── Zone de tracé ──────────────────────────────────────────────────────── */
+.plot {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.svg {
+  display: block;
+  overflow: visible;
+}
+
+/* Grille : trait fin, plein (jamais pointillé), discret */
+.grid {
+  stroke: var(--color-chart-grid);
+  stroke-width: 1px;
+  shape-rendering: crispEdges;
+}
+
+/* La ligne de base (0) est un cran plus marquée que la grille */
+.baseline {
+  stroke: var(--color-chart-axis);
+  stroke-width: 1px;
+  shape-rendering: crispEdges;
+}
+
+/* Graduations : couleur d'axe, chiffres de même largeur pour s'aligner */
+.tick {
+  fill: var(--color-chart-axis);
+  font-family: var(--typography-caption-font-family);
+  font-size: var(--typography-caption-font-size);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Zone cible transparente d'une catégorie : plus large que la marque, focalisable au clavier */
+.target {
+  fill: transparent;
+  cursor: default;
+}
+
+/* :focus-visible = seulement au clavier. Le cadre entoure toute la zone de la catégorie. */
+.target:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+/* ── Infobulle ──────────────────────────────────────────────────────────── */
+.tooltip {
+  position: absolute;
+  z-index: var(--layer-tooltip);
+  min-width: max-content;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  background: var(--color-background-page);
+  box-shadow: var(--shadow-md);
+  color: var(--color-text-default);
+  font-size: var(--typography-caption-font-size);
+  line-height: var(--typography-caption-line-height);
+  pointer-events: none;
+}
+
+.tooltipHeading {
+  margin: 0 0 var(--space-1);
+  color: var(--color-text-subtle);
+}
+
+.tooltipList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tooltipRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.tooltipValue {
+  font-size: var(--typography-body-sm-font-size);
+  font-weight: var(--font-weight-bold);
+  font-variant-numeric: tabular-nums;
+}
+
+.tooltipName {
+  color: var(--color-text-subtle);
+}
+
+.tooltipTotal {
+  margin: var(--space-1) 0 0;
+  padding-top: var(--space-1);
+  border-top: 1px solid var(--color-border-default);
+  color: var(--color-text-subtle);
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* Masqué à l'écran, mais lu par les lecteurs d'écran */
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}

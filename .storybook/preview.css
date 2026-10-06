@@ -1,0 +1,6 @@
+/* Fond et texte de la zone d'aperçu, pour que le thème dark se voie vraiment */
+body {
+  background: var(--color-background-page);
+  color: var(--color-text-default);
+  font-family: var(--font-family-body);
+}

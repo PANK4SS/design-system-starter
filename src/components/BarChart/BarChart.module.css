@@ -1,0 +1,19 @@
+/* Marques des barres. La couleur vient de --_series (remplie par .slot-N de Chart.module.css). */
+.bar {
+  fill: var(--_series);
+}
+
+.group {
+  transition: opacity var(--duration-fast) var(--easing-standard);
+}
+
+/* Au survol/focus d'une catégorie, les autres passent en retrait : la catégorie active ressort */
+.dimmed {
+  opacity: var(--opacity-disabled);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .group {
+    transition: none;
+  }
+}

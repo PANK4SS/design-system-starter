@@ -1,0 +1,88 @@
+/*
+ * Onglets : uniquement des tokens.
+ * L'onglet actif est souligné par une barre de 2px (--_indicator) et son texte passe en couleur par défaut.
+ */
+.tabs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  font-family: var(--font-family-body);
+}
+
+.list {
+  display: flex;
+  gap: var(--space-1);
+  border-bottom: 1px solid var(--color-border-default);
+}
+
+.tab {
+  --_indicator: transparent;
+  --_text: var(--color-text-subtle);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  /* Barre de l'onglet actif, posée sur la bordure basse de la liste */
+  margin-bottom: -1px;
+  border: 0;
+  border-bottom: 2px solid var(--_indicator);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+
+  background: transparent;
+  color: var(--_text);
+  font-family: inherit;
+  font-size: var(--typography-label-md-font-size);
+  font-weight: var(--typography-label-md-font-weight);
+  line-height: var(--typography-label-md-line-height);
+  white-space: nowrap;
+
+  cursor: pointer;
+  transition:
+    color var(--duration-fast) var(--easing-standard),
+    background-color var(--duration-fast) var(--easing-standard);
+}
+
+.tab:hover:not(:disabled) {
+  --_text: var(--color-text-default);
+  background: var(--color-action-subtle-hover);
+}
+
+.tab[aria-selected='true'] {
+  --_indicator: var(--color-text-default);
+  --_text: var(--color-text-default);
+}
+
+/* :focus-visible = seulement au clavier. Ne JAMAIS supprimer. */
+.tab:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+.tab:disabled {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}
+
+.fullWidth .tab {
+  flex: 1;
+}
+
+.panel {
+  color: var(--color-text-default);
+  font-size: var(--typography-body-md-font-size);
+  line-height: var(--typography-body-md-line-height);
+}
+
+.panel:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+/* Respecte le réglage « réduire les animations » du système de l'utilisateur */
+@media (prefers-reduced-motion: reduce) {
+  .tab {
+    transition: none;
+  }
+}

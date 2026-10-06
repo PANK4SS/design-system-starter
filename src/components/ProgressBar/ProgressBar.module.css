@@ -1,0 +1,87 @@
+/* --_fill est « privée » : chaque variante la remplit. */
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+  color: var(--color-text-default);
+  font-family: var(--font-family-body);
+  font-size: var(--typography-label-md-font-size);
+  line-height: var(--typography-label-md-line-height);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.label {
+  font-weight: var(--typography-label-md-font-weight);
+}
+
+.value {
+  color: var(--color-text-subtle);
+  font-variant-numeric: tabular-nums;
+}
+
+/* La piste a une bordure : sa limite reste visible quel que soit le thème */
+.track {
+  position: relative;
+  height: var(--space-2);
+  overflow: hidden;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-full);
+  background: var(--color-background-surface);
+  box-sizing: content-box;
+}
+
+.fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  background: var(--_fill);
+  transition: width var(--duration-slow) var(--easing-standard);
+}
+
+/* ── Variantes ──────────────────────────────────────────────────────────── */
+.brand {
+  --_fill: var(--color-action-primary);
+}
+
+.success {
+  --_fill: var(--color-feedback-success);
+}
+
+.danger {
+  --_fill: var(--color-feedback-danger);
+}
+
+/* ── Indéterminé : un segment fait des allers-retours ───────────────────── */
+.indeterminate .fill {
+  position: absolute;
+  inset-block: 0;
+  width: 40%;
+  animation: slide calc(var(--duration-slow) * 4) var(--easing-standard) infinite;
+}
+
+@keyframes slide {
+  from {
+    left: -40%;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+/* Mouvement réduit : pas de transition, et le segment avance beaucoup plus lentement */
+@media (prefers-reduced-motion: reduce) {
+  .fill {
+    transition: none;
+  }
+
+  .indeterminate .fill {
+    animation-duration: calc(var(--duration-slow) * 15);
+    animation-timing-function: linear;
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "button": {
+    "radius":     { "$value": "{radius.md}",          "$type": "dimension" },
+    "focus-ring": { "$value": "{color.border.focus}", "$type": "color" },
+    "primary": {
+      "background":       { "$value": "{color.action.primary}",       "$type": "color" },
+      "background-hover": { "$value": "{color.action.primary-hover}", "$type": "color" },
+      "text":             { "$value": "{color.text.on-brand}",        "$type": "color" }
+    },
+    "secondary": {
+      "border":           { "$value": "{color.border.strong}",        "$type": "color" },
+      "background-hover": { "$value": "{color.action.subtle-hover}",  "$type": "color" },
+      "text":             { "$value": "{color.text.default}",         "$type": "color" }
+    },
+    "ghost": {
+      "background-hover": { "$value": "{color.action.subtle-hover}",  "$type": "color" },
+      "text":             { "$value": "{color.text.default}",         "$type": "color" }
+    },
+    "danger": {
+      "background":       { "$value": "{color.action.danger}",        "$type": "color" },
+      "background-hover": { "$value": "{color.action.danger-hover}",  "$type": "color" },
+      "text":             { "$value": "{color.text.on-danger}",       "$type": "color" }
+    },
+    "size": {
+      "sm": {
+        "height":    { "$value": "{space.8}",       "$type": "dimension" },
+        "padding-x": { "$value": "{space.3}",       "$type": "dimension" },
+        "font-size": { "$value": "{font.size.200}", "$type": "dimension" }
+      },
+      "md": {
+        "height":    { "$value": "{space.10}",      "$type": "dimension" },
+        "padding-x": { "$value": "{space.4}",       "$type": "dimension" },
+        "font-size": { "$value": "{font.size.300}", "$type": "dimension" }
+      },
+      "lg": {
+        "height":    { "$value": "{space.12}",      "$type": "dimension" },
+        "padding-x": { "$value": "{space.6}",       "$type": "dimension" },
+        "font-size": { "$value": "{font.size.300}", "$type": "dimension" }
+      }
+    }
+  }
+}

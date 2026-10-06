@@ -3,5 +3,10 @@
     "fast":   { "$value": "100ms", "$type": "duration" },
     "normal": { "$value": "200ms", "$type": "duration" },
     "slow":   { "$value": "400ms", "$type": "duration" }
+  },
+  "easing": {
+    "standard":   { "$value": [0.2, 0, 0, 1], "$type": "cubicBezier" },
+    "decelerate": { "$value": [0, 0, 0, 1],   "$type": "cubicBezier" },
+    "accelerate": { "$value": [0.3, 0, 1, 1], "$type": "cubicBezier" }
   }
 }

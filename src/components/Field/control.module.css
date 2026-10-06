@@ -1,0 +1,106 @@
+/*
+ * « Boîte » commune aux contrôles de saisie (Input, Textarea, Select) :
+ * bordure, fond, tailles, états d'erreur, de lecture seule et désactivé.
+ * Les variables --_ sont privées : chaque taille les remplit, .control les consomme.
+ */
+.control {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+
+  min-height: var(--_height);
+  padding-inline: var(--_padding-x);
+  border: 1px solid var(--_border, var(--color-border-strong));
+  border-radius: var(--radius-md);
+
+  background: var(--color-background-page);
+  color: var(--color-text-default);
+  font-family: var(--font-family-body);
+  font-size: var(--_font-size);
+  line-height: var(--font-line-height-normal);
+
+  transition: border-color var(--duration-fast) var(--easing-standard);
+}
+
+.control:hover:not(.disabled) {
+  --_border: var(--color-text-subtle);
+}
+
+/*
+ * Le contour de focus est posé sur la boîte entière (et pas sur le seul <input>),
+ * pour entourer aussi l'icône. Ne JAMAIS le supprimer.
+ */
+.control:has(.native:focus-visible) {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+.invalid,
+.invalid:hover:not(.disabled) {
+  --_border: var(--color-feedback-danger);
+}
+
+.readOnly {
+  background: var(--color-background-surface);
+}
+
+.disabled {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}
+
+/* L'élément natif est « transparent » : c'est la boîte qui porte le style */
+.native {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  /* Le contour est dessiné par .control (voir plus haut) */
+  outline: none;
+}
+
+.native::placeholder {
+  color: var(--color-text-subtle);
+  opacity: 1;
+}
+
+.native:disabled {
+  cursor: not-allowed;
+}
+
+/* Icônes décoratives à l'intérieur de la boîte */
+.adornment {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--color-icon-subtle);
+}
+
+/* ── Tailles ────────────────────────────────────────────────────────────── */
+.sm {
+  --_height: var(--space-8);
+  --_padding-x: var(--space-2);
+  --_font-size: var(--font-size-200);
+}
+
+.md {
+  --_height: var(--space-10);
+  --_padding-x: var(--space-3);
+  --_font-size: var(--font-size-300);
+}
+
+.lg {
+  --_height: var(--space-12);
+  --_padding-x: var(--space-4);
+  --_font-size: var(--font-size-300);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .control {
+    transition: none;
+  }
+}

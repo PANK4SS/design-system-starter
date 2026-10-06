@@ -1,0 +1,41 @@
+/* Fil d'Ariane : uniquement des tokens. */
+.breadcrumb {
+  font-family: var(--font-family-body);
+  font-size: var(--typography-body-sm-font-size);
+  line-height: var(--typography-body-sm-line-height);
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Chevron décoratif (masqué aux lecteurs d'écran par le composant Icon) */
+.separator {
+  color: var(--color-icon-subtle);
+}
+
+/* Page courante : pas soulignée, texte plein */
+.current {
+  color: var(--color-text-default);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+}
+
+/* :focus-visible = seulement au clavier. Ne JAMAIS supprimer. */
+.current:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}

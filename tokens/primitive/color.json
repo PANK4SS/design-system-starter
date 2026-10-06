@@ -1,27 +1,172 @@
 {
   "color": {
     "yellow": {
-      "300": { "$value": "#F2D466", "$type": "color" },
-      "500": { "$value": "#D8AA00", "$type": "color" },
-      "600": { "$value": "#C29900", "$type": "color" },
-      "700": { "$value": "#8F7100", "$type": "color" }
+      "300": {
+        "$value": "#F2D466",
+        "$type": "color"
+      },
+      "500": {
+        "$value": "#D8AA00",
+        "$type": "color"
+      },
+      "600": {
+        "$value": "#C29900",
+        "$type": "color"
+      },
+      "700": {
+        "$value": "#8F7100",
+        "$type": "color"
+      }
     },
     "gray": {
-      "100": { "$value": "#F4F4F6", "$type": "color" },
-      "300": { "$value": "#C9CAD1", "$type": "color" },
-      "500": { "$value": "#7A7D89", "$type": "color" },
-      "700": { "$value": "#40434E", "$type": "color" },
-      "800": { "$value": "#1C1D22", "$type": "color" },
-      "900": { "$value": "#070707", "$type": "color" }
+      "100": {
+        "$value": "#F4F4F6",
+        "$type": "color"
+      },
+      "300": {
+        "$value": "#C9CAD1",
+        "$type": "color"
+      },
+      "500": {
+        "$value": "#7A7D89",
+        "$type": "color"
+      },
+      "700": {
+        "$value": "#40434E",
+        "$type": "color"
+      },
+      "800": {
+        "$value": "#1C1D22",
+        "$type": "color"
+      },
+      "900": {
+        "$value": "#070707",
+        "$type": "color"
+      }
     },
-    "white": { "$value": "#FFFFFF", "$type": "color" },
+    "white": {
+      "$value": "#FFFFFF",
+      "$type": "color"
+    },
     "green": {
-      "500": { "$value": "#13B704", "$type": "color" },
-      "700": { "$value": "#0D7F03", "$type": "color" }
+      "100": {
+        "$value": "#E7F5E6",
+        "$type": "color"
+      },
+      "500": {
+        "$value": "#13B704",
+        "$type": "color"
+      },
+      "700": {
+        "$value": "#0D7F03",
+        "$type": "color"
+      },
+      "900": {
+        "$value": "#0B2109",
+        "$type": "color"
+      }
     },
     "red": {
-      "300": { "$value": "#FF6B5B", "$type": "color" },
-      "500": { "$value": "#D21500", "$type": "color" }
+      "100": {
+        "$value": "#FCE8E6",
+        "$type": "color"
+      },
+      "300": {
+        "$value": "#FF6B5B",
+        "$type": "color"
+      },
+      "500": {
+        "$value": "#D21500",
+        "$type": "color"
+      },
+      "700": {
+        "$value": "#A81100",
+        "$type": "color"
+      },
+      "900": {
+        "$value": "#2C0E0B",
+        "$type": "color"
+      }
+    },
+    "blue": {
+      "100": {
+        "$value": "#EAF2FC",
+        "$type": "color"
+      },
+      "400": {
+        "$value": "#3987E5",
+        "$type": "color"
+      },
+      "500": {
+        "$value": "#2A78D6",
+        "$type": "color"
+      },
+      "700": {
+        "$value": "#1F5FAE",
+        "$type": "color"
+      },
+      "900": {
+        "$value": "#0E1E33",
+        "$type": "color"
+      }
+    },
+    "orange": {
+      "100": {
+        "$value": "#FDEEE7",
+        "$type": "color"
+      },
+      "500": {
+        "$value": "#EB6834",
+        "$type": "color"
+      },
+      "600": {
+        "$value": "#D95926",
+        "$type": "color"
+      },
+      "700": {
+        "$value": "#A8461A",
+        "$type": "color"
+      },
+      "900": {
+        "$value": "#2B160C",
+        "$type": "color"
+      }
+    },
+    "aqua": {
+      "500": {
+        "$value": "#1BAF7A",
+        "$type": "color"
+      },
+      "600": {
+        "$value": "#199E70",
+        "$type": "color"
+      }
+    },
+    "violet": {
+      "400": {
+        "$value": "#9085E9",
+        "$type": "color"
+      },
+      "700": {
+        "$value": "#4A3AA7",
+        "$type": "color"
+      }
+    },
+    "magenta": {
+      "400": {
+        "$value": "#E87BA4",
+        "$type": "color"
+      },
+      "500": {
+        "$value": "#D55181",
+        "$type": "color"
+      }
+    },
+    "black-alpha": {
+      "60": {
+        "$value": "#07070799",
+        "$type": "color"
+      }
     }
   }
 }

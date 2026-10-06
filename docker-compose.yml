@@ -5,3 +5,10 @@ services:
     user: node
     volumes:
       - ./:/app
+
+  # Storybook : docker compose up storybook  →  http://localhost:6006
+  storybook:
+    extends: node
+    ports:
+      - "6006:6006"
+    command: npm run storybook

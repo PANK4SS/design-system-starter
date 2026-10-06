@@ -1,0 +1,73 @@
+/* Les variables --_ sont « privées » : chaque variante et chaque taille les remplit. */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+
+  padding-inline: var(--_padding-x);
+  border: 1px solid var(--_border, transparent);
+  border-radius: var(--radius-full);
+
+  background: var(--_bg);
+  color: var(--_text);
+  font-family: var(--font-family-body);
+  font-size: var(--_font-size);
+  font-weight: var(--font-weight-medium);
+  /* La hauteur de ligne = taille d'icône : badge avec ou sans icône à la même hauteur */
+  line-height: var(--_line-height);
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+/* L'icône suit la taille du badge (le sélecteur l'emporte sur la taille par défaut d'Icon) */
+.badge .icon {
+  width: var(--_icon-size);
+  height: var(--_icon-size);
+}
+
+/* ── Variantes : texte coloré sur surface teintée ───────────────────────── */
+.neutral {
+  --_bg: var(--color-background-surface);
+  --_border: var(--color-border-default);
+  --_text: var(--color-text-default);
+}
+
+.brand {
+  --_bg: var(--color-action-primary);
+  --_text: var(--color-text-on-brand);
+}
+
+.info {
+  --_bg: var(--color-feedback-info-surface);
+  --_text: var(--color-feedback-info);
+}
+
+.success {
+  --_bg: var(--color-feedback-success-surface);
+  --_text: var(--color-feedback-success);
+}
+
+.warning {
+  --_bg: var(--color-feedback-warning-surface);
+  --_text: var(--color-feedback-warning);
+}
+
+.danger {
+  --_bg: var(--color-feedback-danger-surface);
+  --_text: var(--color-feedback-danger);
+}
+
+/* ── Tailles ────────────────────────────────────────────────────────────── */
+.sm {
+  --_padding-x: var(--space-2);
+  --_font-size: var(--font-size-100);
+  --_line-height: var(--icon-size-sm);
+  --_icon-size: var(--font-size-200);
+}
+
+.md {
+  --_padding-x: var(--space-3);
+  --_font-size: var(--font-size-200);
+  --_line-height: var(--icon-size-md);
+  --_icon-size: var(--icon-size-sm);
+}

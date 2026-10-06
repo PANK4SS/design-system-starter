@@ -1,0 +1,74 @@
+/*
+ * Pagination : uniquement des tokens.
+ * Les numéros de page sont des boutons carrés ; la page courante est en couleurs inversées.
+ */
+.pagination {
+  font-family: var(--font-family-body);
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.page {
+  --_bg: transparent;
+  --_text: var(--color-text-default);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--space-8);
+  height: var(--space-8);
+  padding-inline: var(--space-2);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+
+  background: var(--_bg);
+  color: var(--_text);
+  font-family: inherit;
+  font-size: var(--typography-label-md-font-size);
+  font-weight: var(--typography-label-md-font-weight);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--easing-standard);
+}
+
+.page:hover:not([aria-current='page']) {
+  --_bg: var(--color-action-subtle-hover);
+  border-color: var(--color-border-default);
+}
+
+.page[aria-current='page'] {
+  --_bg: var(--color-background-inverse);
+  --_text: var(--color-text-inverse);
+  cursor: default;
+}
+
+/* :focus-visible = seulement au clavier. Ne JAMAIS supprimer. */
+.page:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+.ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--space-8);
+  color: var(--color-icon-subtle);
+}
+
+/* Respecte le réglage « réduire les animations » du système de l'utilisateur */
+@media (prefers-reduced-motion: reduce) {
+  .page {
+    transition: none;
+  }
+}

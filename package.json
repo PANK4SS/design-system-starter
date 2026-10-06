@@ -1,15 +1,31 @@
 {
-  "name": "bbs-design-system",
+  "name": "design-system-starter",
   "version": "0.1.0",
-  "description": "Design system BBS First Security",
-  "main": "index.js",
+  "description": "Starter réutilisable de design system : tokens DTCG générés pour le web, Android et iOS",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node scripts/check-tokens.mjs",
+    "build:tokens": "npm test && node build-tokens.mjs",
+    "typecheck": "tsc",
+    "storybook": "npm run build:tokens && storybook dev --port 6006 --host 0.0.0.0 --no-open",
+    "build:storybook": "npm run build:tokens && storybook build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "style-dictionary": "^5.6.0"
+    "@storybook/addon-a11y": "^10.6.1",
+    "@storybook/addon-docs": "^10.6.1",
+    "@storybook/react-vite": "^10.6.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "storybook": "^10.6.1",
+    "style-dictionary": "^5.6.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.3"
+  },
+  "dependencies": {
+    "lucide-react": "^1.52.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
   }
 }

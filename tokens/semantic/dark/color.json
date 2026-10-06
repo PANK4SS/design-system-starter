@@ -1,24 +1,174 @@
 {
   "color": {
     "background": {
-      "page":    { "$value": "{color.gray.900}", "$type": "color" },
-      "surface": { "$value": "{color.gray.800}", "$type": "color" }
+      "page": {
+        "$value": "{color.gray.900}",
+        "$type": "color"
+      },
+      "surface": {
+        "$value": "{color.gray.800}",
+        "$type": "color"
+      },
+      "overlay": {
+        "$value": "{color.black-alpha.60}",
+        "$type": "color"
+      },
+      "inverse": {
+        "$value": "{color.gray.100}",
+        "$type": "color"
+      },
+      "raised": {
+        "$value": "{color.gray.800}",
+        "$type": "color"
+      }
     },
     "text": {
-      "default":  { "$value": "{color.gray.100}", "$type": "color" },
-      "subtle":   { "$value": "{color.gray.300}", "$type": "color" },
-      "on-brand": { "$value": "{color.gray.900}", "$type": "color" }
+      "default": {
+        "$value": "{color.gray.100}",
+        "$type": "color"
+      },
+      "subtle": {
+        "$value": "{color.gray.300}",
+        "$type": "color"
+      },
+      "on-brand": {
+        "$value": "{color.gray.900}",
+        "$type": "color"
+      },
+      "on-danger": {
+        "$value": "{color.white}",
+        "$type": "color"
+      },
+      "inverse": {
+        "$value": "{color.gray.900}",
+        "$type": "color"
+      }
     },
     "action": {
-      "primary":       { "$value": "{color.yellow.500}", "$type": "color" },
-      "primary-hover": { "$value": "{color.yellow.300}", "$type": "color" }
+      "primary": {
+        "$value": "{color.yellow.500}",
+        "$type": "color"
+      },
+      "primary-hover": {
+        "$value": "{color.yellow.300}",
+        "$type": "color"
+      },
+      "danger": {
+        "$value": "{color.red.500}",
+        "$type": "color"
+      },
+      "danger-hover": {
+        "$value": "{color.red.700}",
+        "$type": "color"
+      },
+      "subtle-hover": {
+        "$value": "{color.gray.800}",
+        "$type": "color"
+      }
     },
     "feedback": {
-      "danger":  { "$value": "{color.red.300}",   "$type": "color" },
-      "success": { "$value": "{color.green.500}", "$type": "color" }
+      "danger": {
+        "$value": "{color.red.300}",
+        "$type": "color"
+      },
+      "success": {
+        "$value": "{color.green.500}",
+        "$type": "color"
+      },
+      "info": {
+        "$value": "{color.blue.400}",
+        "$type": "color"
+      },
+      "warning": {
+        "$value": "{color.orange.500}",
+        "$type": "color"
+      },
+      "info-surface": {
+        "$value": "{color.blue.900}",
+        "$type": "color"
+      },
+      "success-surface": {
+        "$value": "{color.green.900}",
+        "$type": "color"
+      },
+      "warning-surface": {
+        "$value": "{color.orange.900}",
+        "$type": "color"
+      },
+      "danger-surface": {
+        "$value": "{color.red.900}",
+        "$type": "color"
+      }
     },
     "border": {
-      "default": { "$value": "{color.gray.700}", "$type": "color" }
+      "default": {
+        "$value": "{color.gray.700}",
+        "$type": "color"
+      },
+      "strong": {
+        "$value": "{color.gray.500}",
+        "$type": "color"
+      },
+      "focus": {
+        "$value": "{color.yellow.300}",
+        "$type": "color"
+      }
+    },
+    "icon": {
+      "default": {
+        "$value": "{color.gray.100}",
+        "$type": "color"
+      },
+      "subtle": {
+        "$value": "{color.gray.300}",
+        "$type": "color"
+      }
+    },
+    "chart": {
+      "categorical": {
+        "1": {
+          "$value": "{color.blue.400}",
+          "$type": "color"
+        },
+        "2": {
+          "$value": "{color.orange.600}",
+          "$type": "color"
+        },
+        "3": {
+          "$value": "{color.aqua.600}",
+          "$type": "color"
+        },
+        "4": {
+          "$value": "{color.violet.400}",
+          "$type": "color"
+        },
+        "5": {
+          "$value": "{color.magenta.500}",
+          "$type": "color"
+        }
+      },
+      "grid": {
+        "$value": "{color.gray.700}",
+        "$type": "color"
+      },
+      "axis": {
+        "$value": "{color.gray.300}",
+        "$type": "color"
+      },
+      "other": {
+        "$value": "{color.gray.500}",
+        "$type": "color"
+      }
+    },
+    "control": {
+      "checked": {
+        "$value": "{color.yellow.500}",
+        "$type": "color"
+      },
+      "on-checked": {
+        "$value": "{color.gray.900}",
+        "$type": "color"
+      }
     }
   }
 }

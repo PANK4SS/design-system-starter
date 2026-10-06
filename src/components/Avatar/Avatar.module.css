@@ -1,0 +1,98 @@
+/* Les variables --_ sont « privées » : chaque taille et chaque statut les remplit. */
+.avatar {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--_size);
+  height: var(--_size);
+
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-full);
+  background: var(--color-background-surface);
+  color: var(--color-text-default);
+  font-family: var(--font-family-body);
+  font-size: var(--_font-size);
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  vertical-align: middle;
+  user-select: none;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+}
+
+.initials {
+  letter-spacing: var(--typography-label-md-letter-spacing);
+}
+
+/* L'icône de repli suit la taille de l'avatar (l'emporte sur la taille par défaut d'Icon) */
+.avatar .fallbackIcon {
+  width: var(--_icon-size);
+  height: var(--_icon-size);
+  color: var(--color-icon-subtle);
+}
+
+/* ── Tailles ────────────────────────────────────────────────────────────── */
+.sm {
+  --_size: var(--space-8);
+  --_font-size: var(--font-size-100);
+  --_icon-size: var(--icon-size-sm);
+  --_status-size: var(--space-2);
+}
+
+.md {
+  --_size: var(--space-10);
+  --_font-size: var(--font-size-200);
+  --_icon-size: var(--icon-size-md);
+  --_status-size: var(--space-3);
+}
+
+.lg {
+  --_size: var(--space-12);
+  --_font-size: var(--font-size-300);
+  --_icon-size: var(--icon-size-lg);
+  --_status-size: var(--space-3);
+}
+
+.xl {
+  --_size: var(--space-16);
+  --_font-size: var(--font-size-500);
+  --_icon-size: var(--icon-size-xl);
+  --_status-size: var(--space-4);
+}
+
+/* ── Pastille de statut ─────────────────────────────────────────────────── */
+.status {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: var(--_status-size);
+  height: var(--_status-size);
+  /* Anneau de la couleur du fond : détache la pastille de la photo */
+  border: 2px solid var(--color-background-page);
+  border-radius: var(--radius-full);
+  background: var(--_status-color);
+  box-sizing: content-box;
+}
+
+.online {
+  --_status-color: var(--color-feedback-success);
+}
+
+.away {
+  --_status-color: var(--color-feedback-warning);
+}
+
+.busy {
+  --_status-color: var(--color-feedback-danger);
+}
+
+.offline {
+  --_status-color: var(--color-border-strong);
+}

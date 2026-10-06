@@ -1,0 +1,64 @@
+/*
+ * --_width et --_height sont « privées » : remplies par les props `width` / `height`,
+ * avec une valeur par défaut propre à chaque forme.
+ */
+.skeleton {
+  display: block;
+  /* Reflet clair qui glisse sur la forme grise */
+  background: linear-gradient(
+    90deg,
+    var(--color-background-surface) 0%,
+    var(--color-border-default) 50%,
+    var(--color-background-surface) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer calc(var(--duration-slow) * 4) var(--easing-standard) infinite;
+}
+
+/* ── Formes ─────────────────────────────────────────────────────────────── */
+.lines {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: var(--_width, 100%);
+}
+
+.text {
+  height: var(--typography-body-md-font-size);
+  border-radius: var(--radius-sm);
+}
+
+/* Dernière ligne d'un paragraphe : plus courte */
+.text:last-child:not(:first-child) {
+  width: 60%;
+}
+
+.circle {
+  width: var(--_width, var(--space-10));
+  aspect-ratio: 1;
+  border-radius: var(--radius-full);
+}
+
+.rect {
+  width: var(--_width, 100%);
+  height: var(--_height, var(--space-16));
+  border-radius: var(--radius-md);
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 100% 0;
+  }
+
+  to {
+    background-position: -100% 0;
+  }
+}
+
+/* Mouvement réduit : formes fixes, sans reflet */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+    background: var(--color-background-surface);
+  }
+}

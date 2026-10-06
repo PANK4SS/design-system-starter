@@ -1,0 +1,14 @@
+.icon {
+  flex-shrink: 0;
+  /* La couleur suit le texte autour : l'icône s'adapte toute seule au thème et au contexte */
+  color: currentColor;
+}
+
+.sm { width: var(--icon-size-sm); height: var(--icon-size-sm); }
+.md { width: var(--icon-size-md); height: var(--icon-size-md); }
+.lg { width: var(--icon-size-lg); height: var(--icon-size-lg); }
+.xl { width: var(--icon-size-xl); height: var(--icon-size-xl); }
+
+/* Le CSS l'emporte sur l'attribut stroke-width posé par Lucide : l'épaisseur vient des tokens */
+.regular { stroke-width: var(--icon-stroke-regular); }
+.bold { stroke-width: var(--icon-stroke-bold); }

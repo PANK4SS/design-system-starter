@@ -1,0 +1,109 @@
+/*
+ * La case native est conservée (clavier, lecteurs d'écran, formulaires) mais redessinée :
+ * appearance: none efface le rendu du navigateur, les icônes Check / Minus sont posées par-dessus.
+ */
+.checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  font-family: var(--font-family-body);
+}
+
+/* Conteneur de la case : il porte les icônes superposées */
+.box {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  /* Centre la case sur la première ligne du libellé */
+  margin-block-start: calc((var(--typography-body-md-font-size) * var(--typography-body-md-line-height) - var(--icon-size-md)) / 2);
+}
+
+.input {
+  appearance: none;
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  margin: 0;
+  border: 2px solid var(--_border, var(--color-border-strong));
+  border-radius: var(--radius-sm);
+  background: var(--_bg, var(--color-background-page));
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--easing-standard),
+    border-color var(--duration-fast) var(--easing-standard);
+}
+
+.input:hover:not(:disabled) {
+  --_border: var(--color-text-subtle);
+}
+
+.input:checked,
+.input:indeterminate,
+.input:hover:checked:not(:disabled),
+.input:hover:indeterminate:not(:disabled) {
+  --_border: var(--color-control-checked);
+  --_bg: var(--color-control-checked);
+}
+
+.invalid,
+.invalid:hover:not(:disabled) {
+  --_border: var(--color-feedback-danger);
+}
+
+.input:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+.input:disabled {
+  cursor: not-allowed;
+}
+
+/* Les icônes ne s'affichent que dans le bon état, et laissent passer les clics vers la case */
+.check,
+.dash {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  color: var(--color-control-on-checked);
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.input:checked:not(:indeterminate) ~ .check,
+.input:indeterminate ~ .dash {
+  visibility: visible;
+}
+
+/* ── Texte ──────────────────────────────────────────────────────────────── */
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.label {
+  color: var(--color-text-default);
+  font-size: var(--typography-body-md-font-size);
+  line-height: var(--typography-body-md-line-height);
+  cursor: pointer;
+}
+
+/*
+ * Désactivé : on estompe le contrôle et son libellé, mais PAS la description,
+ * qui reste lisible (elle explique souvent pourquoi le choix est indisponible).
+ */
+.disabled .box,
+.disabled .label {
+  opacity: var(--opacity-disabled);
+}
+
+.disabled .label {
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .input {
+    transition: none;
+  }
+}

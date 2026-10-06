@@ -1,0 +1,14 @@
+{
+  "icon": {
+    "size": {
+      "sm": { "$value": "16px", "$type": "dimension" },
+      "md": { "$value": "20px", "$type": "dimension" },
+      "lg": { "$value": "24px", "$type": "dimension" },
+      "xl": { "$value": "32px", "$type": "dimension" }
+    },
+    "stroke": {
+      "regular": { "$value": 1.5, "$type": "number" },
+      "bold":    { "$value": 2,   "$type": "number" }
+    }
+  }
+}

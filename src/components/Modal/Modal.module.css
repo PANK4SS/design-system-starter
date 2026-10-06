@@ -1,0 +1,164 @@
+/*
+ * Fenêtre modale : uniquement des tokens.
+ * La largeur maximale vient de --_width, remplie par chaque taille (multiples de --space-16,
+ * faute de token de largeur dédié).
+ */
+.dialog {
+  /* Le <dialog> n'a pas de marge interne : un clic sur lui-même = un clic sur le fond */
+  padding: 0;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+
+  width: min(var(--_width), calc(100% - var(--space-8)));
+  max-height: calc(100% - var(--space-16));
+  overflow: hidden;
+
+  background: var(--color-background-page);
+  color: var(--color-text-default);
+  font-family: var(--font-family-body);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Fond assombri derrière la fenêtre (fourni par le navigateur avec showModal()) */
+.dialog::backdrop {
+  background: var(--color-background-overlay);
+}
+
+/* ── Animation d'ouverture ──────────────────────────────────────────────── */
+.dialog[open] {
+  /* Colonne flexible : seul le corps défile, l'en-tête et les actions restent visibles */
+  display: flex;
+  flex-direction: column;
+  animation: modal-in var(--duration-normal) var(--easing-decelerate);
+}
+
+.dialog[open]::backdrop {
+  animation: backdrop-in var(--duration-normal) var(--easing-decelerate);
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(var(--space-2)) scale(0.98);
+  }
+}
+
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* ── Structure ──────────────────────────────────────────────────────────── */
+.panel {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-6) var(--space-6) var(--space-4);
+}
+
+.heading {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--typography-heading-md-font-family);
+  font-size: var(--font-size-400);
+  font-weight: var(--typography-heading-md-font-weight);
+  line-height: var(--typography-heading-md-line-height);
+  letter-spacing: var(--typography-heading-md-letter-spacing);
+}
+
+.description {
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-subtle);
+  font-size: var(--typography-body-sm-font-size);
+  line-height: var(--typography-body-sm-line-height);
+}
+
+/* Le corps défile seul si le contenu est long : en-tête et actions restent visibles */
+.body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0 var(--space-6) var(--space-6);
+  font-size: var(--typography-body-md-font-size);
+  line-height: var(--typography-body-md-line-height);
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-6);
+  border-top: 1px solid var(--color-border-default);
+}
+
+/* Corps défilant atteint au clavier : l'anneau est dessiné à l'intérieur pour ne pas être rogné */
+.body:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: calc(var(--space-1) * -1);
+}
+
+/* ── Bouton de fermeture (icône seule) ──────────────────────────────────── */
+.close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--space-8);
+  height: var(--space-8);
+  margin: calc(var(--space-1) * -1) calc(var(--space-2) * -1) 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--color-icon-default);
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--easing-standard);
+}
+
+.close:hover {
+  background: var(--color-action-subtle-hover);
+}
+
+/* :focus-visible = seulement au clavier. Ne JAMAIS supprimer. */
+.close:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+/* ── Tailles ────────────────────────────────────────────────────────────── */
+.sm {
+  --_width: calc(var(--space-16) * 6);
+}
+
+.md {
+  --_width: calc(var(--space-16) * 8);
+}
+
+.lg {
+  --_width: calc(var(--space-16) * 12);
+}
+
+/* Respecte le réglage « réduire les animations » du système de l'utilisateur */
+@media (prefers-reduced-motion: reduce) {
+  .dialog[open],
+  .dialog[open]::backdrop {
+    animation: none;
+  }
+
+  .close {
+    transition: none;
+  }
+}

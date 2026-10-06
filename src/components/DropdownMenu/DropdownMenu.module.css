@@ -1,0 +1,111 @@
+/*
+ * Menu déroulant : uniquement des tokens.
+ * Le menu est positionné en absolu sous le déclencheur ; --_align choisit le bord d'alignement.
+ */
+.root {
+  position: relative;
+  display: inline-flex;
+}
+
+.chevron {
+  transition: transform var(--duration-fast) var(--easing-standard);
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.menu {
+  position: absolute;
+  z-index: var(--layer-dropdown);
+  top: calc(100% + var(--space-1));
+
+  display: flex;
+  flex-direction: column;
+  min-width: calc(var(--space-16) * 3);
+  max-width: calc(var(--space-16) * 5);
+  padding: var(--space-1);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+
+  background: var(--color-background-page);
+  box-shadow: var(--shadow-md);
+  animation: menu-in var(--duration-fast) var(--easing-decelerate);
+}
+
+.start {
+  left: 0;
+}
+
+.end {
+  right: 0;
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(calc(var(--space-1) * -1));
+  }
+}
+
+/* ── Actions ────────────────────────────────────────────────────────────── */
+.item {
+  --_text: var(--color-text-default);
+
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  border: 0;
+  border-radius: var(--radius-md);
+
+  background: transparent;
+  color: var(--_text);
+  font-family: var(--font-family-body);
+  font-size: var(--typography-body-sm-font-size);
+  line-height: var(--typography-body-sm-line-height);
+  text-align: start;
+
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--easing-standard);
+}
+
+/* L'action qui a le focus (clavier ou survol) est surlignée */
+.item:focus {
+  background: var(--color-action-subtle-hover);
+  outline: none;
+}
+
+/* Au clavier, l'anneau de focus s'ajoute au surlignage. Ne JAMAIS supprimer. */
+.item:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+.danger {
+  --_text: var(--color-feedback-danger);
+}
+
+.item[aria-disabled='true'] {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}
+
+.separator {
+  height: 1px;
+  margin: var(--space-1) 0;
+  background: var(--color-border-default);
+}
+
+/* Respecte le réglage « réduire les animations » du système de l'utilisateur */
+@media (prefers-reduced-motion: reduce) {
+  .menu {
+    animation: none;
+  }
+
+  .item,
+  .chevron {
+    transition: none;
+  }
+}

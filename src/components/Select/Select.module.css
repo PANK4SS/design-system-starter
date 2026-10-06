@@ -1,0 +1,30 @@
+/*
+ * La boîte (bordure, tailles, états) vient de Field/control.module.css.
+ * Le <select> occupe toute la boîte pour que tout clic l'ouvre ; le chevron est posé par-dessus.
+ */
+/* « select.select » : plus spécifique que .native, quel que soit l'ordre de chargement des CSS */
+select.select {
+  appearance: none;
+  align-self: stretch;
+  /* Le select déborde sur le padding de la boîte : toute la surface est cliquable */
+  margin-inline: calc(var(--_padding-x) * -1);
+  padding-inline: var(--_padding-x) calc(var(--_padding-x) + var(--icon-size-sm) + var(--space-2));
+  cursor: pointer;
+}
+
+/* Les options héritent des couleurs du thème (utile en mode sombre) */
+select.select option {
+  background: var(--color-background-page);
+  color: var(--color-text-default);
+}
+
+.chevron {
+  position: absolute;
+  inset-inline-end: var(--_padding-x);
+  pointer-events: none;
+}
+
+/* Tant que le placeholder est affiché, il prend la couleur atténuée d'un placeholder */
+select.select:has(option[value='']:checked) {
+  color: var(--color-text-subtle);
+}

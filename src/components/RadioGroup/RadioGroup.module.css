@@ -1,0 +1,124 @@
+/*
+ * Groupe de boutons radio : <fieldset> + <legend>, sans le cadre par défaut du navigateur.
+ */
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: var(--font-family-body);
+}
+
+.legend {
+  padding: 0;
+  color: var(--color-text-default);
+  font-size: var(--typography-label-md-font-size);
+  font-weight: var(--typography-label-md-font-weight);
+  line-height: var(--typography-label-md-line-height);
+}
+
+.required {
+  color: var(--color-feedback-danger);
+}
+
+.options {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.vertical {
+  flex-direction: column;
+}
+
+.horizontal {
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-gap: var(--space-6);
+}
+
+/* ── Un bouton radio ────────────────────────────────────────────────────── */
+.radio {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+.input {
+  appearance: none;
+  flex-shrink: 0;
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  margin: 0;
+  /* Centre le rond sur la première ligne du libellé */
+  margin-block-start: calc((var(--typography-body-md-font-size) * var(--typography-body-md-line-height) - var(--icon-size-md)) / 2);
+  border: 2px solid var(--_border, var(--color-border-strong));
+  border-radius: var(--radius-full);
+  background: var(--color-background-page);
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--easing-standard);
+}
+
+.input:hover:not(:disabled) {
+  --_border: var(--color-text-subtle);
+}
+
+/* Coché : anneau + pastille centrale, dessinés avec un dégradé (aucune image) */
+.input:checked,
+.input:hover:checked:not(:disabled) {
+  --_border: var(--color-control-checked);
+  background: radial-gradient(
+    circle,
+    var(--color-control-checked) 0 40%,
+    var(--color-background-page) 44%
+  );
+}
+
+.invalid,
+.invalid:hover:not(:disabled) {
+  --_border: var(--color-feedback-danger);
+}
+
+.input:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+.input:disabled {
+  cursor: not-allowed;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.label {
+  color: var(--color-text-default);
+  font-size: var(--typography-body-md-font-size);
+  line-height: var(--typography-body-md-line-height);
+  cursor: pointer;
+}
+
+/*
+ * Désactivé : on estompe le contrôle et son libellé, mais PAS la description,
+ * qui reste lisible (elle explique souvent pourquoi le choix est indisponible).
+ */
+.disabled .input,
+.disabled .label {
+  opacity: var(--opacity-disabled);
+}
+
+.disabled .label {
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .input {
+    transition: none;
+  }
+}

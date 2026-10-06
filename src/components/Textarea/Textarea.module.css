@@ -1,0 +1,17 @@
+/*
+ * La boîte (bordure, états) vient de Field/control.module.css.
+ * Ici : le padding vertical et le redimensionnement, propres au champ multiligne.
+ */
+.box {
+  align-items: stretch;
+  padding-block: var(--space-2);
+}
+
+.textarea {
+  min-height: calc(var(--space-12) + var(--space-4));
+  resize: vertical;
+}
+
+.fixed {
+  resize: none;
+}

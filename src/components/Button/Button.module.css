@@ -1,0 +1,137 @@
+/*
+ * Le bouton ne connaît AUCUNE valeur brute : uniquement des tokens.
+ * Les variables qui commencent par --_ sont « privées » : chaque variante et chaque
+ * taille les remplit, et la classe .button les consomme.
+ */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+
+  height: var(--_height);
+  padding-inline: var(--_padding-x);
+  border: 1px solid var(--_border, transparent);
+  border-radius: var(--button-radius);
+
+  background: var(--_bg, transparent);
+  color: var(--_text);
+  font-family: var(--font-family-body);
+  font-size: var(--_font-size);
+  font-weight: var(--font-weight-medium);
+  line-height: 1;
+  white-space: nowrap;
+
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--easing-standard);
+}
+
+.button:hover:not(:disabled) {
+  background: var(--_bg-hover);
+}
+
+/* :focus-visible = seulement au clavier (pas au clic souris). Ne JAMAIS supprimer. */
+.button:focus-visible {
+  outline: 2px solid var(--button-focus-ring);
+  outline-offset: 2px;
+}
+
+.button:disabled {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}
+
+/* Un bouton en chargement est bloqué, mais ne doit pas avoir l'air « désactivé » */
+.button.loading {
+  opacity: 1;
+  cursor: progress;
+}
+
+/* ── Variantes ──────────────────────────────────────────────────────────── */
+.primary {
+  --_bg: var(--button-primary-background);
+  --_bg-hover: var(--button-primary-background-hover);
+  --_text: var(--button-primary-text);
+}
+
+.secondary {
+  --_border: var(--button-secondary-border);
+  --_bg-hover: var(--button-secondary-background-hover);
+  --_text: var(--button-secondary-text);
+}
+
+.ghost {
+  --_bg-hover: var(--button-ghost-background-hover);
+  --_text: var(--button-ghost-text);
+}
+
+.danger {
+  --_bg: var(--button-danger-background);
+  --_bg-hover: var(--button-danger-background-hover);
+  --_text: var(--button-danger-text);
+}
+
+/* ── Tailles ────────────────────────────────────────────────────────────── */
+.sm {
+  --_height: var(--button-size-sm-height);
+  --_padding-x: var(--button-size-sm-padding-x);
+  --_font-size: var(--button-size-sm-font-size);
+}
+
+.md {
+  --_height: var(--button-size-md-height);
+  --_padding-x: var(--button-size-md-padding-x);
+  --_font-size: var(--button-size-md-font-size);
+}
+
+.lg {
+  --_height: var(--button-size-lg-height);
+  --_padding-x: var(--button-size-lg-padding-x);
+  --_font-size: var(--button-size-lg-font-size);
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+/* Bouton carré, utilisé par IconButton */
+.iconOnly {
+  width: var(--_height);
+  padding-inline: 0;
+}
+
+/* ── Icônes et chargement ───────────────────────────────────────────────── */
+.icon {
+  display: inline-flex;
+}
+
+.icon svg {
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
+}
+
+.spinner {
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: var(--radius-full);
+  animation: spin 700ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Respecte le réglage « réduire les animations » du système de l'utilisateur */
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+
+  .spinner {
+    animation-duration: 2s;
+  }
+}

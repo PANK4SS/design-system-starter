@@ -1,0 +1,107 @@
+/* --_accent et --_bg sont « privées » : chaque variante les remplit. */
+.alert {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+
+  /* Liseré épais à gauche : repère visuel du type de message */
+  border: 1px solid var(--_accent);
+  border-inline-start-width: var(--space-1);
+  border-radius: var(--radius-md);
+
+  background: var(--_bg);
+  color: var(--color-text-default);
+  font-family: var(--font-family-body);
+  font-size: var(--typography-body-sm-font-size);
+  line-height: var(--typography-body-sm-line-height);
+}
+
+/* L'icône prend la couleur du type de message (le sélecteur l'emporte sur `color` d'Icon) */
+.alert .icon {
+  color: var(--_accent);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--typography-body-md-font-size);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--icon-size-md);
+}
+
+.description > :first-child {
+  margin-top: 0;
+}
+
+.description > :last-child {
+  margin-bottom: 0;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+/* ── Bouton de fermeture ────────────────────────────────────────────────── */
+.close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--space-8);
+  height: var(--space-8);
+  /* Recentre la croix sur la première ligne sans agrandir l'alerte */
+  margin: calc(-1 * var(--space-1)) calc(-1 * var(--space-1)) 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-icon-default);
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--easing-standard);
+}
+
+.close:hover {
+  background: var(--color-background-page);
+}
+
+.close:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+/* ── Variantes ──────────────────────────────────────────────────────────── */
+.info {
+  --_accent: var(--color-feedback-info);
+  --_bg: var(--color-feedback-info-surface);
+}
+
+.success {
+  --_accent: var(--color-feedback-success);
+  --_bg: var(--color-feedback-success-surface);
+}
+
+.warning {
+  --_accent: var(--color-feedback-warning);
+  --_bg: var(--color-feedback-warning-surface);
+}
+
+.danger {
+  --_accent: var(--color-feedback-danger);
+  --_bg: var(--color-feedback-danger-surface);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .close {
+    transition: none;
+  }
+}
