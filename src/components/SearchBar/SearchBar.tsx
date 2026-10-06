@@ -9,8 +9,10 @@ import styles from './SearchBar.module.css';
 
 export type SearchBarSize = 'sm' | 'md' | 'lg';
 
-export interface SearchBarProps
-  extends Omit<ComponentProps<'input'>, 'size' | 'type' | 'value' | 'defaultValue' | 'onChange'> {
+export interface SearchBarProps extends Omit<
+  ComponentProps<'input'>,
+  'size' | 'type' | 'value' | 'defaultValue' | 'onChange'
+> {
   /** Libellé du champ (et nom du repère « recherche »). Masqué visuellement par défaut, mais toujours lu. */
   label?: string;
   /** Affiche le libellé au-dessus du champ au lieu de le masquer. */

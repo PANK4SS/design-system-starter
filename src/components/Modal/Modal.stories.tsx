@@ -82,8 +82,12 @@ function ModalDemo({
 
 const confirmFooter = (close: () => void) => (
   <>
-    <Button variant="secondary" onClick={close}>Annuler</Button>
-    <Button variant="danger" onClick={close}>Supprimer le projet</Button>
+    <Button variant="secondary" onClick={close}>
+      Annuler
+    </Button>
+    <Button variant="danger" onClick={close}>
+      Supprimer le projet
+    </Button>
   </>
 );
 
@@ -117,7 +121,9 @@ export const Formulaire: Story = {
       triggerVariant="primary"
       renderFooter={(close) => (
         <>
-          <Button variant="secondary" onClick={close}>Annuler</Button>
+          <Button variant="secondary" onClick={close}>
+            Annuler
+          </Button>
           <Button onClick={close}>Envoyer l'invitation</Button>
         </>
       )}
@@ -143,8 +149,8 @@ export const Formulaire: Story = {
 
 const longText = Array.from({ length: 8 }, (_, i) => (
   <p key={i}>
-    Article {i + 1}. Les journaux d'accès sont conservés douze mois puis anonymisés. Chaque consultation des
-    données sensibles est tracée et peut faire l'objet d'un contrôle par le responsable de la sécurité.
+    Article {i + 1}. Les journaux d'accès sont conservés douze mois puis anonymisés. Chaque consultation des données
+    sensibles est tracée et peut faire l'objet d'un contrôle par le responsable de la sécurité.
   </p>
 ));
 

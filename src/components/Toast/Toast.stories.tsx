@@ -70,13 +70,17 @@ function Triggers() {
       </Button>
       <Button
         variant="secondary"
-        onClick={() => toast({ title: 'Connexion instable', description: 'Nouvelle tentative en cours.', variant: 'warning' })}
+        onClick={() =>
+          toast({ title: 'Connexion instable', description: 'Nouvelle tentative en cours.', variant: 'warning' })
+        }
       >
         Avertissement
       </Button>
       <Button
         variant="secondary"
-        onClick={() => toast({ title: 'Envoi impossible', description: 'Vérifiez votre connexion.', variant: 'danger' })}
+        onClick={() =>
+          toast({ title: 'Envoi impossible', description: 'Vérifiez votre connexion.', variant: 'danger' })
+        }
       >
         Erreur
       </Button>
@@ -122,8 +126,18 @@ function StackDemo() {
   useEffect(() => {
     if (shown.current) return;
     shown.current = true;
-    toast({ title: 'Badge d’accès activé', description: 'Karim Benali, entrepôt Nord.', variant: 'success', duration: Infinity });
-    toast({ title: 'Maintenance ce soir', description: 'Caméras indisponibles de 3 h à 4 h.', variant: 'info', duration: Infinity });
+    toast({
+      title: 'Badge d’accès activé',
+      description: 'Karim Benali, entrepôt Nord.',
+      variant: 'success',
+      duration: Infinity,
+    });
+    toast({
+      title: 'Maintenance ce soir',
+      description: 'Caméras indisponibles de 3 h à 4 h.',
+      variant: 'info',
+      duration: Infinity,
+    });
     toast({ title: 'Batterie faible', description: 'Détecteur du hall B.', variant: 'warning', duration: Infinity });
     toast({ title: 'Synchronisation échouée', variant: 'danger', duration: Infinity });
   }, [toast]);

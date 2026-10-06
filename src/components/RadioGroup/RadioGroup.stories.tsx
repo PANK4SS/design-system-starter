@@ -49,7 +49,7 @@ export const WithHint: Story = {
 
 export const Horizontal: Story = {
   args: {
-    label: 'Badge d\'accès remis ?',
+    label: "Badge d'accès remis ?",
     orientation: 'horizontal',
     defaultValue: undefined,
     options: [
@@ -69,10 +69,7 @@ export const WithError: Story = {
 
 export const DisabledOption: Story = {
   args: {
-    options: [
-      ...niveaux.slice(0, 2),
-      { ...niveaux[2], disabled: true, description: 'Indisponible sur ce site.' },
-    ],
+    options: [...niveaux.slice(0, 2), { ...niveaux[2], disabled: true, description: 'Indisponible sur ce site.' }],
   },
 };
 
@@ -86,7 +83,15 @@ export const WithChildrenControlled: Story = {
   render: function Render(args) {
     const [value, setValue] = useState('jour');
     return (
-      <RadioGroup {...args} label="Créneau de ronde" value={value} onChange={(next) => { setValue(next); args.onChange?.(next); }}>
+      <RadioGroup
+        {...args}
+        label="Créneau de ronde"
+        value={value}
+        onChange={(next) => {
+          setValue(next);
+          args.onChange?.(next);
+        }}
+      >
         <Radio value="jour" label="Jour (6 h – 18 h)" />
         <Radio value="nuit" label="Nuit (18 h – 6 h)" />
         <Radio value="continu" label="En continu" />

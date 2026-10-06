@@ -60,13 +60,18 @@
   color: var(--color-text-subtle);
 }
 
-.positive { --_delta-color: var(--color-feedback-success); }
-.negative { --_delta-color: var(--color-feedback-danger); }
-.neutral { --_delta-color: var(--color-text-subtle); }
+.positive {
+  --_delta-color: var(--color-feedback-success);
+}
+.negative {
+  --_delta-color: var(--color-feedback-danger);
+}
+.neutral {
+  --_delta-color: var(--color-text-subtle);
+}
 
 .helper {
   color: var(--color-text-subtle);
   font-size: var(--typography-caption-font-size);
   line-height: var(--typography-caption-line-height);
 }
-

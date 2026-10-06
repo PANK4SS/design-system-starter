@@ -33,5 +33,7 @@ export function Skeleton({ variant = 'text', lines = 1, width, height, className
     );
   }
 
-  return <span {...rest} aria-hidden="true" className={cx(styles.skeleton, styles[variant], className)} style={sizeStyle} />;
+  return (
+    <span {...rest} aria-hidden="true" className={cx(styles.skeleton, styles[variant], className)} style={sizeStyle} />
+  );
 }

@@ -10,7 +10,10 @@ export default defineConfig({
       // Noms de classes lisibles dans l'app qui utilise le design system : ds-Button__primary-1a2b3
       generateScopedName: (local, file) => {
         const component = basename(file).replace(/\.module\.css$/, '');
-        const hash = createHash('sha1').update(file + local).digest('hex').slice(0, 5);
+        const hash = createHash('sha1')
+          .update(file + local)
+          .digest('hex')
+          .slice(0, 5);
         return `ds-${component}__${local}-${hash}`;
       },
     },

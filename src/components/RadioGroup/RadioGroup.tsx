@@ -103,7 +103,8 @@ export function RadioGroup({
         {label}
         {required && (
           <span className={styles.required} aria-hidden="true">
-            {' '}*
+            {' '}
+            *
           </span>
         )}
       </legend>
@@ -131,7 +132,10 @@ export function RadioGroup({
   );
 }
 
-export interface RadioProps extends Omit<ComponentProps<'input'>, 'type' | 'name' | 'checked' | 'defaultChecked' | 'value' | 'size'> {
+export interface RadioProps extends Omit<
+  ComponentProps<'input'>,
+  'type' | 'name' | 'checked' | 'defaultChecked' | 'value' | 'size'
+> {
   /** Valeur envoyée quand ce choix est sélectionné. */
   value: string;
   /** Libellé cliquable. */

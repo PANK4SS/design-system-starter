@@ -14,12 +14,33 @@ interface Incident {
 
 const incidents: Incident[] = [
   { id: 'INC-2041', site: 'Lyon Part-Dieu', type: 'Intrusion', agent: 'Karim Benali', date: '2026-09-28', duree: 42 },
-  { id: 'INC-2042', site: 'Marseille Euroméditerranée', type: 'Alarme incendie', agent: 'Julie Martin', date: '2026-09-29', duree: 18 },
+  {
+    id: 'INC-2042',
+    site: 'Marseille Euroméditerranée',
+    type: 'Alarme incendie',
+    agent: 'Julie Martin',
+    date: '2026-09-29',
+    duree: 18,
+  },
   { id: 'INC-2043', site: 'Lille Europe', type: 'Badge refusé', agent: 'Thomas Leroy', date: '2026-09-30', duree: 5 },
   { id: 'INC-2044', site: 'Nantes Atlantis', type: 'Intrusion', agent: 'Awa Diallo', date: '2026-10-01', duree: 63 },
   { id: 'INC-2045', site: 'Bordeaux Mériadeck', type: 'Malaise', agent: 'Lucas Petit', date: '2026-10-02', duree: 27 },
-  { id: 'INC-2046', site: 'Toulouse Blagnac', type: 'Porte forcée', agent: 'Inès Moreau', date: '2026-10-03', duree: 34 },
-  { id: 'INC-2047', site: 'Strasbourg Wacken', type: 'Alarme technique', agent: 'Hugo Fontaine', date: '2026-10-04', duree: 12 },
+  {
+    id: 'INC-2046',
+    site: 'Toulouse Blagnac',
+    type: 'Porte forcée',
+    agent: 'Inès Moreau',
+    date: '2026-10-03',
+    duree: 34,
+  },
+  {
+    id: 'INC-2047',
+    site: 'Strasbourg Wacken',
+    type: 'Alarme technique',
+    agent: 'Hugo Fontaine',
+    date: '2026-10-04',
+    duree: 12,
+  },
   { id: 'INC-2048', site: 'Rennes Cesson', type: 'Intrusion', agent: 'Sarah Lambert', date: '2026-10-05', duree: 51 },
 ];
 
@@ -42,9 +63,11 @@ function sortRows(rows: Incident[], sort: TableSort | null) {
   return [...rows].sort((a, b) => {
     const left = a[key];
     const right = b[key];
-    return (typeof left === 'number' && typeof right === 'number'
-      ? left - right
-      : String(left).localeCompare(String(right), 'fr')) * factor;
+    return (
+      (typeof left === 'number' && typeof right === 'number'
+        ? left - right
+        : String(left).localeCompare(String(right), 'fr')) * factor
+    );
   });
 }
 

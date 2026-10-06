@@ -42,13 +42,25 @@
 }
 
 /* ── Couleurs de séries : ordre FIXE, jamais recyclé ───────────────────── */
-.slot-1 { --_series: var(--color-chart-categorical-1); }
-.slot-2 { --_series: var(--color-chart-categorical-2); }
-.slot-3 { --_series: var(--color-chart-categorical-3); }
-.slot-4 { --_series: var(--color-chart-categorical-4); }
-.slot-5 { --_series: var(--color-chart-categorical-5); }
+.slot-1 {
+  --_series: var(--color-chart-categorical-1);
+}
+.slot-2 {
+  --_series: var(--color-chart-categorical-2);
+}
+.slot-3 {
+  --_series: var(--color-chart-categorical-3);
+}
+.slot-4 {
+  --_series: var(--color-chart-categorical-4);
+}
+.slot-5 {
+  --_series: var(--color-chart-categorical-5);
+}
 /* « Autre » : gris de mise en retrait, jamais une 6e teinte */
-.slot-other { --_series: var(--color-chart-other); }
+.slot-other {
+  --_series: var(--color-chart-other);
+}
 
 /* ── Légende (le texte reste en couleur de texte, jamais en couleur de série) ── */
 .legend {
@@ -188,4 +200,3 @@
   display: flex;
   justify-content: flex-start;
 }
-

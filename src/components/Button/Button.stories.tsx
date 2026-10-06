@@ -59,9 +59,15 @@ export const Danger: Story = {
 export const Sizes: Story = {
   render: (args) => (
     <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
-      <Button {...args} size="sm">Petit</Button>
-      <Button {...args} size="md">Moyen</Button>
-      <Button {...args} size="lg">Grand</Button>
+      <Button {...args} size="sm">
+        Petit
+      </Button>
+      <Button {...args} size="md">
+        Moyen
+      </Button>
+      <Button {...args} size="lg">
+        Grand
+      </Button>
     </div>
   ),
 };
@@ -69,10 +75,18 @@ export const Sizes: Story = {
 export const AllVariants: Story = {
   render: (args) => (
     <div style={{ display: 'flex', gap: 16 }}>
-      <Button {...args} variant="primary">Primary</Button>
-      <Button {...args} variant="secondary">Secondary</Button>
-      <Button {...args} variant="ghost">Ghost</Button>
-      <Button {...args} variant="danger">Danger</Button>
+      <Button {...args} variant="primary">
+        Primary
+      </Button>
+      <Button {...args} variant="secondary">
+        Secondary
+      </Button>
+      <Button {...args} variant="ghost">
+        Ghost
+      </Button>
+      <Button {...args} variant="danger">
+        Danger
+      </Button>
     </div>
   ),
 };
@@ -100,7 +114,7 @@ export const IconOnly: Story = {
     docs: {
       description: {
         story:
-          '`IconButton` : bouton carré sans texte. Son `label` est obligatoire, il est lu par les lecteurs d\'écran.',
+          "`IconButton` : bouton carré sans texte. Son `label` est obligatoire, il est lu par les lecteurs d'écran.",
       },
     },
   },

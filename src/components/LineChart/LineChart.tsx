@@ -146,8 +146,7 @@ export function LineChart({
               ))}
             </svg>
             <span id={hintId} className={chartStyles.visuallyHidden}>
-              {description ? `${description} ` : ''}Utilisez les flèches gauche et droite pour parcourir les
-              valeurs.
+              {description ? `${description} ` : ''}Utilisez les flèches gauche et droite pour parcourir les valeurs.
             </span>
             {active !== null && (
               <ChartTooltip

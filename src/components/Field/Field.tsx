@@ -84,7 +84,8 @@ export function Field({ label, hint, error, ids, required, hideLabel, className,
         {/* L'astérisque est décoratif : `required` sur le contrôle annonce déjà « obligatoire » */}
         {required && (
           <span className={styles.required} aria-hidden="true">
-            {' '}*
+            {' '}
+            *
           </span>
         )}
       </label>

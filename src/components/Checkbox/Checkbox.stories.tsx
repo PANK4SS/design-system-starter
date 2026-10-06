@@ -43,7 +43,7 @@ export const WithDescription: Story = {
 
 export const WithError: Story = {
   args: {
-    label: 'J\'accepte les conditions générales d\'utilisation',
+    label: "J'accepte les conditions générales d'utilisation",
     required: true,
     error: 'Vous devez accepter les conditions pour créer votre compte.',
   },

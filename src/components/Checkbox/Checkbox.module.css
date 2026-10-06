@@ -15,7 +15,9 @@
   display: inline-flex;
   flex-shrink: 0;
   /* Centre la case sur la première ligne du libellé */
-  margin-block-start: calc((var(--typography-body-md-font-size) * var(--typography-body-md-line-height) - var(--icon-size-md)) / 2);
+  margin-block-start: calc(
+    (var(--typography-body-md-font-size) * var(--typography-body-md-line-height) - var(--icon-size-md)) / 2
+  );
 }
 
 .input {

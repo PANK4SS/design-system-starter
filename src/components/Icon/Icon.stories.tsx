@@ -1,7 +1,22 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import {
-  ArrowRight, Bell, Check, ChevronDown, CircleAlert, CircleCheck, Eye, Info, Lock, Menu, Search, Settings,
-  Shield, Trash2, TriangleAlert, User, X,
+  ArrowRight,
+  Bell,
+  Check,
+  ChevronDown,
+  CircleAlert,
+  CircleCheck,
+  Eye,
+  Info,
+  Lock,
+  Menu,
+  Search,
+  Settings,
+  Shield,
+  Trash2,
+  TriangleAlert,
+  User,
+  X,
 } from 'lucide-react';
 import { Icon } from './Icon';
 
@@ -53,8 +68,23 @@ export const Sizes: Story = {
 };
 
 const gallery = {
-  ArrowRight, Bell, Check, ChevronDown, CircleAlert, CircleCheck, Eye, Info, Lock, Menu, Search, Settings, Shield,
-  Trash2, TriangleAlert, User, X,
+  ArrowRight,
+  Bell,
+  Check,
+  ChevronDown,
+  CircleAlert,
+  CircleCheck,
+  Eye,
+  Info,
+  Lock,
+  Menu,
+  Search,
+  Settings,
+  Shield,
+  Trash2,
+  TriangleAlert,
+  User,
+  X,
 };
 
 export const Gallery: Story = {

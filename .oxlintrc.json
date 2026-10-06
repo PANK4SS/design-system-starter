@@ -1,11 +1,6 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": [
-    "typescript",
-    "react",
-    "jsx-a11y",
-    "import"
-  ],
+  "plugins": ["typescript", "react", "jsx-a11y", "import"],
   "categories": {
     "correctness": "error",
     "suspicious": "warn"
@@ -23,9 +18,5 @@
     "jsx-a11y/prefer-tag-over-role": "off",
     "import/no-unassigned-import": "off"
   },
-  "ignorePatterns": [
-    "dist",
-    "storybook-static",
-    "node_modules"
-  ]
+  "ignorePatterns": ["dist", "storybook-static", "node_modules"]
 }

@@ -53,7 +53,9 @@
   height: var(--icon-size-md);
   margin: 0;
   /* Centre le rond sur la première ligne du libellé */
-  margin-block-start: calc((var(--typography-body-md-font-size) * var(--typography-body-md-line-height) - var(--icon-size-md)) / 2);
+  margin-block-start: calc(
+    (var(--typography-body-md-font-size) * var(--typography-body-md-line-height) - var(--icon-size-md)) / 2
+  );
   border: 2px solid var(--_border, var(--color-border-strong));
   border-radius: var(--radius-full);
   background: var(--color-background-page);
@@ -69,11 +71,7 @@
 .input:checked,
 .input:hover:checked:not(:disabled) {
   --_border: var(--color-control-checked);
-  background: radial-gradient(
-    circle,
-    var(--color-control-checked) 0 40%,
-    var(--color-background-page) 44%
-  );
+  background: radial-gradient(circle, var(--color-control-checked) 0 40%, var(--color-background-page) 44%);
 }
 
 .invalid,

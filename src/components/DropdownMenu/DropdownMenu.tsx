@@ -190,7 +190,9 @@ export function DropdownMenu({
         onClick={() => (open ? close(false) : openAt(0))}
         onKeyDown={onTriggerKeyDown}
         iconEnd={
-          hideChevron ? undefined : <Icon icon={ChevronDown} size="sm" className={cx(styles.chevron, open && styles.chevronOpen)} />
+          hideChevron ? undefined : (
+            <Icon icon={ChevronDown} size="sm" className={cx(styles.chevron, open && styles.chevronOpen)} />
+          )
         }
       >
         {label}

@@ -2,8 +2,15 @@
 import { HEADER, px, ms, round, hexToRgb, firstFamily } from './helpers.mjs';
 
 const SWIFT_WEIGHTS = {
-  100: 'ultraLight', 200: 'thin', 300: 'light', 400: 'regular', 500: 'medium',
-  600: 'semibold', 700: 'bold', 800: 'heavy', 900: 'black',
+  100: 'ultraLight',
+  200: 'thin',
+  300: 'light',
+  400: 'regular',
+  500: 'medium',
+  600: 'semibold',
+  700: 'bold',
+  800: 'heavy',
+  900: 'black',
 };
 
 const swiftColor = (hex) => {
@@ -45,9 +52,7 @@ const header = `// ${HEADER}\nimport SwiftUI\n`;
 export const swiftEnum = {
   name: 'ds/swift-enum',
   format: ({ dictionary, options }) => {
-    const lines = dictionary.allTokens.map(
-      (t) => `    public static let ${t.name} = ${toSwift(t, options.prefix)}`,
-    );
+    const lines = dictionary.allTokens.map((t) => `    public static let ${t.name} = ${toSwift(t, options.prefix)}`);
     return `${header}\npublic enum ${options.name} {\n${lines.join('\n')}\n}\n`;
   },
 };

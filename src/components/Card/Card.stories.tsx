@@ -65,8 +65,8 @@ const siteContent = (
     />
     <CardBody>
       <p>
-        Dernière ronde à 02 h 40 par l'agent Karim Benali. Aucun incident signalé, toutes les issues de secours
-        sont verrouillées.
+        Dernière ronde à 02 h 40 par l'agent Karim Benali. Aucun incident signalé, toutes les issues de secours sont
+        verrouillées.
       </p>
     </CardBody>
   </>
@@ -77,8 +77,12 @@ export const Outlined: Story = {
     <Card {...args} style={{ maxWidth: 'calc(var(--space-16) * 6)' }}>
       {siteContent}
       <CardFooter>
-        <Button variant="secondary" size="sm" onClick={fn()}>Voir l'historique</Button>
-        <Button size="sm" onClick={fn()}>Lancer une ronde</Button>
+        <Button variant="secondary" size="sm" onClick={fn()}>
+          Voir l'historique
+        </Button>
+        <Button size="sm" onClick={fn()}>
+          Lancer une ronde
+        </Button>
       </CardFooter>
     </Card>
   ),
@@ -131,7 +135,9 @@ export const InteractiveLink: Story = {
         <p>La caméra du quai de chargement ne répond plus depuis 01 h 12. Cliquez sur la carte pour ouvrir le site.</p>
       </CardBody>
       <CardFooter align="start">
-        <Button variant="secondary" size="sm" onClick={fn()}>Prévenir le technicien</Button>
+        <Button variant="secondary" size="sm" onClick={fn()}>
+          Prévenir le technicien
+        </Button>
       </CardFooter>
     </Card>
   ),

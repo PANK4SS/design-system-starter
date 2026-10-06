@@ -1,10 +1,4 @@
-import type {
-  AnchorHTMLAttributes,
-  ButtonHTMLAttributes,
-  HTMLAttributes,
-  ImgHTMLAttributes,
-  ReactNode,
-} from 'react';
+import type { AnchorHTMLAttributes, ButtonHTMLAttributes, HTMLAttributes, ImgHTMLAttributes, ReactNode } from 'react';
 import { cx } from '../../utils/cx';
 import styles from './Card.module.css';
 
@@ -47,7 +41,13 @@ export function Card({
   return (
     <Element
       {...rest}
-      className={cx(styles.card, styles[variant], styles[`padding-${padding}`], interactive && styles.interactive, className)}
+      className={cx(
+        styles.card,
+        styles[variant],
+        styles[`padding-${padding}`],
+        interactive && styles.interactive,
+        className,
+      )}
     >
       {children}
     </Element>

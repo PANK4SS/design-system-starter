@@ -65,10 +65,7 @@ export const Default: Story = {};
 export const OngletDesactive: Story = {
   name: 'Onglet désactivé',
   args: {
-    items: [
-      ...accountTabs.slice(0, 2),
-      { ...accountTabs[2], disabled: true },
-    ],
+    items: [...accountTabs.slice(0, 2), { ...accountTabs[2], disabled: true }],
   },
 };
 
@@ -79,8 +76,16 @@ export const SansIcones: Story = {
     defaultValue: 'vulnerabilites',
     items: [
       { value: 'resume', label: 'Résumé', content: 'Trois points critiques relevés sur le périmètre réseau.' },
-      { value: 'vulnerabilites', label: 'Vulnérabilités', content: '12 vulnérabilités, dont 3 critiques et 5 moyennes.' },
-      { value: 'recommandations', label: 'Recommandations', content: 'Mettre à jour le pare-feu et activer la double authentification.' },
+      {
+        value: 'vulnerabilites',
+        label: 'Vulnérabilités',
+        content: '12 vulnérabilités, dont 3 critiques et 5 moyennes.',
+      },
+      {
+        value: 'recommandations',
+        label: 'Recommandations',
+        content: 'Mettre à jour le pare-feu et activer la double authentification.',
+      },
     ],
   },
 };

@@ -17,7 +17,15 @@ export interface SwitchProps extends Omit<ComponentProps<'input'>, 'type' | 'siz
  * Case à cocher native avec `role="switch"` : annoncée « activé / désactivé », basculée avec Espace.
  * Contrôlé (`checked` + `onChange`) ou non (`defaultChecked`).
  */
-export function Switch({ label, description, id, disabled, className, 'aria-describedby': ariaDescribedBy, ...rest }: SwitchProps) {
+export function Switch({
+  label,
+  description,
+  id,
+  disabled,
+  className,
+  'aria-describedby': ariaDescribedBy,
+  ...rest
+}: SwitchProps) {
   const ids = useFieldIds({ id, hasHint: Boolean(description), describedBy: ariaDescribedBy });
 
   return (

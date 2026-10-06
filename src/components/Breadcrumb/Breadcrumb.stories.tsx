@@ -40,10 +40,7 @@ export const Default: Story = {};
 export const DeuxNiveaux: Story = {
   name: 'Deux niveaux',
   args: {
-    items: [
-      { label: 'Accueil', href: '#' },
-      { label: 'Paramètres' },
-    ],
+    items: [{ label: 'Accueil', href: '#' }, { label: 'Paramètres' }],
   },
 };
 

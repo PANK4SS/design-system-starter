@@ -86,8 +86,12 @@ export const WithActions: Story = {
     children: 'La caméra du quai de chargement ne répond plus depuis 01 h 12.',
     actions: (
       <>
-        <Button size="sm" variant="secondary" onClick={fn()}>Voir le journal</Button>
-        <Button size="sm" onClick={fn()}>Prévenir le technicien</Button>
+        <Button size="sm" variant="secondary" onClick={fn()}>
+          Voir le journal
+        </Button>
+        <Button size="sm" onClick={fn()}>
+          Prévenir le technicien
+        </Button>
       </>
     ),
   },
@@ -99,7 +103,9 @@ export const Dismissible: Story = {
     return visible ? (
       <Alert {...args} onDismiss={() => setVisible(false)} />
     ) : (
-      <Button variant="secondary" onClick={() => setVisible(true)}>Réafficher le message</Button>
+      <Button variant="secondary" onClick={() => setVisible(true)}>
+        Réafficher le message
+      </Button>
     );
   },
 };
@@ -107,10 +113,18 @@ export const Dismissible: Story = {
 export const AllVariants: Story = {
   render: () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
-      <Alert variant="info" title="Information" onDismiss={fn()}>Nouveau planning disponible.</Alert>
-      <Alert variant="success" title="Succès" onDismiss={fn()}>Badge d’accès activé.</Alert>
-      <Alert variant="warning" title="Attention" onDismiss={fn()}>Certificat expirant dans 7 jours.</Alert>
-      <Alert variant="danger" title="Erreur" onDismiss={fn()}>Impossible de joindre le boîtier d’alarme.</Alert>
+      <Alert variant="info" title="Information" onDismiss={fn()}>
+        Nouveau planning disponible.
+      </Alert>
+      <Alert variant="success" title="Succès" onDismiss={fn()}>
+        Badge d’accès activé.
+      </Alert>
+      <Alert variant="warning" title="Attention" onDismiss={fn()}>
+        Certificat expirant dans 7 jours.
+      </Alert>
+      <Alert variant="danger" title="Erreur" onDismiss={fn()}>
+        Impossible de joindre le boîtier d’alarme.
+      </Alert>
     </div>
   ),
 };

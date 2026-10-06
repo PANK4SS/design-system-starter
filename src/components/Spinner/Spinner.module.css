@@ -22,15 +22,22 @@
   animation: spin calc(var(--duration-slow) * 2) linear infinite;
 }
 
-.sm { --_size: var(--icon-size-sm); }
-.md { --_size: var(--icon-size-md); }
-.lg { --_size: var(--icon-size-lg); }
-.xl { --_size: var(--icon-size-xl); }
+.sm {
+  --_size: var(--icon-size-sm);
+}
+.md {
+  --_size: var(--icon-size-md);
+}
+.lg {
+  --_size: var(--icon-size-lg);
+}
+.xl {
+  --_size: var(--icon-size-xl);
+}
 
 .label {
   color: var(--color-text-subtle);
 }
-
 
 @keyframes spin {
   to {

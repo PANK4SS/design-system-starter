@@ -48,9 +48,16 @@ export const DansUnParagraphe: Story = {
   parameters: { layout: 'padded' },
   render: (args) => (
     <p style={{ maxWidth: '60ch', margin: 0, lineHeight: 'var(--font-line-height-normal)' }}>
-      Avant de valider votre accès, prenez connaissance de la <Link {...args}>charte informatique</Link> et
-      des recommandations du <Link href="https://cyber.gouv.fr" external>site de l'ANSSI</Link>. Vos données sont
-      traitées conformément à notre <Link href="#" variant="subtle">politique de confidentialité</Link>.
+      Avant de valider votre accès, prenez connaissance de la <Link {...args}>charte informatique</Link> et des
+      recommandations du{' '}
+      <Link href="https://cyber.gouv.fr" external>
+        site de l'ANSSI
+      </Link>
+      . Vos données sont traitées conformément à notre{' '}
+      <Link href="#" variant="subtle">
+        politique de confidentialité
+      </Link>
+      .
     </p>
   ),
 };
@@ -59,9 +66,15 @@ export const PiedDePage: Story = {
   name: 'Pied de page',
   render: () => (
     <nav aria-label="Liens utiles" style={{ display: 'flex', gap: 'var(--space-6)', fontSize: 'var(--font-size-200)' }}>
-      <Link href="#" variant="subtle">Mentions légales</Link>
-      <Link href="#" variant="subtle">Accessibilité : partiellement conforme</Link>
-      <Link href="#" variant="subtle">Plan du site</Link>
+      <Link href="#" variant="subtle">
+        Mentions légales
+      </Link>
+      <Link href="#" variant="subtle">
+        Accessibilité : partiellement conforme
+      </Link>
+      <Link href="#" variant="subtle">
+        Plan du site
+      </Link>
     </nav>
   ),
 };

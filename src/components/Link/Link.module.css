@@ -45,7 +45,6 @@
   vertical-align: middle;
 }
 
-
 /* Respecte le réglage « réduire les animations » du système de l'utilisateur */
 @media (prefers-reduced-motion: reduce) {
   .link {

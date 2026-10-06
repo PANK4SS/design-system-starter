@@ -12,7 +12,7 @@ const sites = [
 const meta = {
   title: 'Formulaires/Select',
   component: Select,
-  args: { label: 'Site d\'intervention', options: sites, placeholder: 'Choisir un site', onChange: fn() },
+  args: { label: "Site d'intervention", options: sites, placeholder: 'Choisir un site', onChange: fn() },
   argTypes: {
     size: { control: 'inline-radio' },
   },
@@ -46,11 +46,11 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {};
 
 export const WithValue: Story = {
-  args: { defaultValue: 'lyon', hint: 'Le site où l\'agent sera affecté.' },
+  args: { defaultValue: 'lyon', hint: "Le site où l'agent sera affecté." },
 };
 
 export const WithError: Story = {
-  args: { required: true, error: 'Choisissez le site d\'intervention.' },
+  args: { required: true, error: "Choisissez le site d'intervention." },
 };
 
 export const Sizes: Story = {

@@ -10,7 +10,11 @@ const meta = {
   args: {
     content: 'Copie le lien dans le presse-papiers',
     placement: 'top',
-    children: <Button variant="secondary" iconStart={<Icon icon={Copy} size="sm" />}>Copier le lien</Button>,
+    children: (
+      <Button variant="secondary" iconStart={<Icon icon={Copy} size="sm" />}>
+        Copier le lien
+      </Button>
+    ),
   },
   argTypes: {
     placement: { control: 'inline-radio' },
@@ -76,7 +80,14 @@ export const BoutonsIcones: Story = {
 
 export const Placements: Story = {
   render: (args) => (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, auto)', gap: 'var(--space-16)', padding: 'var(--space-12)' }}>
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(2, auto)',
+        gap: 'var(--space-16)',
+        padding: 'var(--space-12)',
+      }}
+    >
       {(['top', 'bottom', 'left', 'right'] as const).map((placement) => (
         <Tooltip key={placement} {...args} placement={placement} content={`Infobulle « ${placement} »`}>
           <Button variant="secondary">Placement {placement}</Button>

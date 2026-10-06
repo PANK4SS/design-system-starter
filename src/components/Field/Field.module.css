@@ -43,4 +43,3 @@
 .messageIcon {
   margin-block-start: calc((1lh - var(--icon-size-sm)) / 2);
 }
-

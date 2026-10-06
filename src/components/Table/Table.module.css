@@ -37,7 +37,6 @@
   border-bottom: 1px solid var(--color-border-default);
 }
 
-
 /* ── Densité ────────────────────────────────────────────────────────────── */
 .compact {
   --_pad-y: var(--space-1);
@@ -70,8 +69,12 @@
   border-bottom: 0;
 }
 
-.start { text-align: start; }
-.center { text-align: center; }
+.start {
+  text-align: start;
+}
+.center {
+  text-align: center;
+}
 
 /* Les nombres alignés à droite gardent des chiffres de même largeur pour s'aligner en colonne */
 .end {

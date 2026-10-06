@@ -1,17 +1,11 @@
 {
-  "extends": [
-    "stylelint-config-recommended"
-  ],
-  "plugins": [
-    "stylelint-declaration-strict-value"
-  ],
+  "extends": ["stylelint-config-recommended"],
+  "plugins": ["stylelint-declaration-strict-value"],
   "rules": {
     "selector-pseudo-class-no-unknown": [
       true,
       {
-        "ignorePseudoClasses": [
-          "global"
-        ]
+        "ignorePseudoClasses": ["global"]
       }
     ],
     "color-no-hex": [
@@ -27,17 +21,7 @@
       }
     ],
     "function-disallowed-list": [
-      [
-        "rgb",
-        "rgba",
-        "hsl",
-        "hsla",
-        "hwb",
-        "lab",
-        "lch",
-        "oklab",
-        "oklch"
-      ],
+      ["rgb", "rgba", "hsl", "hsla", "hwb", "lab", "lch", "oklab", "oklch"],
       {
         "message": "Fonction de couleur interdite : utiliser un token var(--color-…)"
       }

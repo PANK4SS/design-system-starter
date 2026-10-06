@@ -6,7 +6,7 @@ const meta = {
   title: 'Formulaires/Textarea',
   component: Textarea,
   args: {
-    label: 'Description de l\'incident',
+    label: "Description de l'incident",
     placeholder: 'Décrivez ce que vous avez constaté, où et à quelle heure.',
     onChange: fn(),
   },
@@ -46,7 +46,7 @@ export const WithHint: Story = {
 export const WithError: Story = {
   args: {
     required: true,
-    error: 'Décrivez l\'incident en quelques mots pour que l\'équipe puisse intervenir.',
+    error: "Décrivez l'incident en quelques mots pour que l'équipe puisse intervenir.",
   },
 };
 

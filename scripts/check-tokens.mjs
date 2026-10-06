@@ -58,9 +58,7 @@ const load = (files) => files.reduce((tree, f) => merge(tree, JSON.parse(readFil
 
 // { "color.text.default": token, ... }
 const flatten = (tree, prefix = '') =>
-  Object.entries(tree).flatMap(([k, v]) =>
-    '$value' in v ? [[prefix + k, v]] : flatten(v, `${prefix}${k}.`),
-  );
+  Object.entries(tree).flatMap(([k, v]) => ('$value' in v ? [[prefix + k, v]] : flatten(v, `${prefix}${k}.`)));
 
 // ─── Contraste WCAG ───────────────────────────────────────────────────────────
 const luminance = (hex) => {
@@ -87,7 +85,9 @@ const keysByTheme = {};
 for (const theme of THEMES) {
   const themeFiles = jsonFiles(`tokens/semantic/${theme}`);
   const all = Object.fromEntries(flatten(load([...primitiveFiles, ...sharedFiles, ...themeFiles, ...componentFiles])));
-  keysByTheme[theme] = flatten(load(themeFiles)).map(([k]) => k).sort();
+  keysByTheme[theme] = flatten(load(themeFiles))
+    .map(([k]) => k)
+    .sort();
 
   // Résout un alias "{color.gray.900}" jusqu'à la valeur finale
   const resolve = (value, seen = []) => {
@@ -100,9 +100,10 @@ for (const theme of THEMES) {
 
   // 1. Tous les alias pointent vers un token existant
   for (const [name, token] of Object.entries(all)) {
-    const values = typeof token.$value === 'object' && !Array.isArray(token.$value)
-      ? Object.values(token.$value) // token composite (typographie)
-      : [token.$value];
+    const values =
+      typeof token.$value === 'object' && !Array.isArray(token.$value)
+        ? Object.values(token.$value) // token composite (typographie)
+        : [token.$value];
     for (const v of values) {
       try {
         resolve(v);
