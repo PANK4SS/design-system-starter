@@ -3,6 +3,7 @@ import { ArrowDown, ArrowUp, ArrowUpDown } from 'lucide-react';
 import { cx } from '../../utils/cx';
 import { Icon } from '../Icon';
 import styles from './Table.module.css';
+import a11y from '../../utils/visuallyHidden.module.css';
 
 export type TableAlign = 'start' | 'center' | 'end';
 export type TableDensity = 'compact' | 'comfortable';
@@ -95,11 +96,12 @@ export function Table<Row>({
       className={cx(styles.scroller, stickyHeader && styles.sticky, className)}
       role="region"
       aria-labelledby={captionId}
+      // oxlint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- zone qui défile : atteignable au clavier (règle axe scrollable-region-focusable)
       tabIndex={0}
       style={maxHeight ? { maxHeight } : undefined}
     >
       <table ref={ref} className={cx(styles.table, styles[density], striped && styles.striped)}>
-        <caption id={captionId} className={cx(styles.caption, hideCaption && styles.visuallyHidden)}>
+        <caption id={captionId} className={cx(styles.caption, hideCaption && a11y.visuallyHidden)}>
           {caption}
         </caption>
         <thead>

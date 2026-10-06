@@ -27,6 +27,7 @@ export function Switch({ label, description, id, disabled, className, 'aria-desc
           {...rest}
           id={ids.controlId}
           type="checkbox"
+          // oxlint-disable-next-line jsx-a11y/role-has-required-aria-props -- un <input type="checkbox"> fournit nativement l'état coché (pas besoin d'aria-checked)
           role="switch"
           className={styles.input}
           disabled={disabled}

@@ -39,6 +39,7 @@
 .tooltip::before {
   content: '';
   position: absolute;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value -- empilement local, sous la bulle */
   z-index: -1;
   inset: calc(var(--space-2) * -1);
 }

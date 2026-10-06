@@ -59,7 +59,7 @@ export function Tooltip({ content, children, placement = 'top', delay = 300, cla
   }, [visible]);
 
   // Nettoyage du minuteur si le composant disparaît pendant le délai
-  useEffect(() => clearTimer, []);
+  useEffect(() => () => window.clearTimeout(timer.current), []);
 
   // On ajoute notre id à un éventuel aria-describedby déjà présent sur le déclencheur
   const trigger = isValidElement(children)

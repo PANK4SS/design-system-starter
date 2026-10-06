@@ -3,6 +3,7 @@ import { ExternalLink } from 'lucide-react';
 import { cx } from '../../utils/cx';
 import { Icon } from '../Icon';
 import styles from './Link.module.css';
+import a11y from '../../utils/visuallyHidden.module.css';
 
 export type LinkVariant = 'default' | 'subtle';
 
@@ -35,7 +36,7 @@ export function Link({ variant = 'default', external = false, className, childre
       {external && (
         <>
           <Icon icon={ExternalLink} size="sm" className={styles.icon} />
-          <span className={styles.srOnly}>(nouvel onglet)</span>
+          <span className={a11y.visuallyHidden}>(nouvel onglet)</span>
         </>
       )}
     </a>

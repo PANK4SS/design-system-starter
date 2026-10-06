@@ -85,6 +85,7 @@ export function Tabs({ items, label, value, defaultValue, onChange, fullWidth = 
 
   return (
     <div className={cx(styles.tabs, className)}>
+      {/* oxlint-disable-next-line jsx-a11y/interactive-supports-focus -- APG : le focus va sur l'onglet actif (tabindex mobile), pas sur la liste */}
       <div
         role="tablist"
         aria-label={label}

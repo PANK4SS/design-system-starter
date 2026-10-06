@@ -1,6 +1,7 @@
 import type { HTMLAttributes } from 'react';
 import { cx } from '../../utils/cx';
 import styles from './Spinner.module.css';
+import a11y from '../../utils/visuallyHidden.module.css';
 
 export type SpinnerSize = 'sm' | 'md' | 'lg' | 'xl';
 
@@ -22,7 +23,7 @@ export function Spinner({ size = 'md', label = 'Chargement…', showLabel = fals
   return (
     <span {...rest} role="status" className={cx(styles.spinner, styles[size], className)}>
       <span className={styles.circle} aria-hidden="true" />
-      <span className={showLabel ? styles.label : styles.srOnly}>{label}</span>
+      <span className={showLabel ? styles.label : a11y.visuallyHidden}>{label}</span>
     </span>
   );
 }

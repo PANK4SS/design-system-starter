@@ -32,7 +32,7 @@ Le composant est **contrôlé** : le parent garde \`page\` et la met à jour dan
       },
     },
   },
-  render: (args) => {
+  render: function Render(args) {
     const [page, setPage] = useState(args.page);
     return (
       <Pagination

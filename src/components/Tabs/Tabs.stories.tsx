@@ -93,7 +93,7 @@ export const PleineLargeur: Story = {
 /** Le parent garde l'onglet actif dans son état et peut le changer de l'extérieur. */
 export const Controle: Story = {
   name: 'Contrôlé',
-  render: (args) => {
+  render: function Render(args) {
     const [value, setValue] = useState('securite');
     return (
       <div style={{ display: 'grid', gap: 'var(--space-4)' }}>

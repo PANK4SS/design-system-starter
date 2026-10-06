@@ -116,7 +116,7 @@
   border: 2px solid currentColor;
   border-right-color: transparent;
   border-radius: var(--radius-full);
-  animation: spin 700ms linear infinite;
+  animation: spin calc(var(--duration-slow) * 2) linear infinite;
 }
 
 @keyframes spin {
@@ -132,6 +132,6 @@
   }
 
   .spinner {
-    animation-duration: 2s;
+    animation-duration: calc(var(--duration-slow) * 8);
   }
 }

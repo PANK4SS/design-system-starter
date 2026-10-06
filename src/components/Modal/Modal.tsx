@@ -137,6 +137,7 @@ export function Modal({
   };
 
   return (
+    // oxlint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions -- clic sur le fond pour fermer ; au clavier, Échap fait la même chose (natif)
     <dialog
       {...rest}
       ref={dialogRef}
@@ -165,6 +166,7 @@ export function Modal({
             </button>
           </header>
 
+          {/* oxlint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- contenu qui défile : atteignable au clavier (règle axe scrollable-region-focusable) */}
           <div ref={bodyRef} className={styles.body} tabIndex={bodyScrollable ? 0 : undefined}>
             {children}
           </div>

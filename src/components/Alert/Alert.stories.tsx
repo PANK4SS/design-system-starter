@@ -94,7 +94,7 @@ export const WithActions: Story = {
 };
 
 export const Dismissible: Story = {
-  render: (args) => {
+  render: function Render(args) {
     const [visible, setVisible] = useState(true);
     return visible ? (
       <Alert {...args} onDismiss={() => setVisible(false)} />

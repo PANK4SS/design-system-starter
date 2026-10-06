@@ -3,6 +3,7 @@ import { CircleAlert } from 'lucide-react';
 import { cx } from '../../utils/cx';
 import { Icon } from '../Icon';
 import styles from './Field.module.css';
+import a11y from '../../utils/visuallyHidden.module.css';
 
 export interface FieldIdsOptions {
   /** Identifiant imposé par le consommateur (sinon un identifiant unique est généré). */
@@ -78,7 +79,7 @@ export interface FieldProps {
 export function Field({ label, hint, error, ids, required, hideLabel, className, children }: FieldProps) {
   return (
     <div className={cx(styles.field, className)}>
-      <label htmlFor={ids.controlId} className={cx(styles.label, hideLabel && styles.visuallyHidden)}>
+      <label htmlFor={ids.controlId} className={cx(styles.label, hideLabel && a11y.visuallyHidden)}>
         {label}
         {/* L'astérisque est décoratif : `required` sur le contrôle annonce déjà « obligatoire » */}
         {required && (

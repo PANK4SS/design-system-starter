@@ -7,6 +7,7 @@ import { Table, type TableColumn } from '../Table';
 import type { ResolvedSeries } from './series';
 import { useElementWidth } from './useElementWidth';
 import styles from './Chart.module.css';
+import a11y from '../../utils/visuallyHidden.module.css';
 
 /** Props communes à tous les graphiques. */
 export interface ChartBaseProps {
@@ -80,7 +81,7 @@ export function ChartFrame({
 
   return (
     <figure className={cx(styles.figure, className)}>
-      <figcaption className={cx(styles.header, hideTitle && styles.visuallyHidden)}>
+      <figcaption className={cx(styles.header, hideTitle && a11y.visuallyHidden)}>
         <span className={styles.title}>{title}</span>
         {description && <span className={styles.description}>{description}</span>}
       </figcaption>

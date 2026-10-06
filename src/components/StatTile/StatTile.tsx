@@ -3,6 +3,7 @@ import { Minus, TrendingDown, TrendingUp } from 'lucide-react';
 import { cx } from '../../utils/cx';
 import { Icon } from '../Icon';
 import styles from './StatTile.module.css';
+import a11y from '../../utils/visuallyHidden.module.css';
 
 export type StatTileDeltaDirection = 'up' | 'down' | 'flat';
 /** Lecture de l'évolution : une hausse des incidents est `negative`, une hausse des rondes est `positive`. */
@@ -52,7 +53,7 @@ export function StatTile({ label, value, delta, helperText, className, ref, ...r
         {delta && (
           <dd className={cx(styles.delta, styles[delta.tone ?? 'neutral'])}>
             <Icon icon={directionIcons[delta.direction]} size="sm" stroke="bold" />
-            <span className={styles.visuallyHidden}>{directionLabels[delta.direction]} :</span>
+            <span className={a11y.visuallyHidden}>{directionLabels[delta.direction]} :</span>
             <span className={styles.deltaValue}>{delta.value}</span>
             {delta.period && <span className={styles.period}>{delta.period}</span>}
           </dd>

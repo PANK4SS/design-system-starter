@@ -149,6 +149,7 @@ function ToastItem({ item, onDismiss, onRemove }: ToastItemProps) {
   };
 
   return (
+    // oxlint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- le survol met le minuteur en pause ; le focus clavier aussi (onFocus)
     <li
       className={cx(styles.toast, closing && styles.closing)}
       onPointerEnter={() => setHovered(true)}

@@ -64,6 +64,7 @@ function ModalDemo({
 }) {
   const [open, setOpen] = useState(args.open);
   // Le contrôle « open » du panneau Controls pilote aussi la fenêtre
+  // oxlint-disable-next-line react/set-state-in-effect -- story uniquement : synchronise le contrôle « open » de Storybook
   useEffect(() => setOpen(args.open), [args.open]);
   const close = () => {
     setOpen(false);

@@ -96,6 +96,7 @@ export const Visible: Story = {
   args: { content: 'Dernière modification il y a 5 minutes' },
   render: (args) => (
     <Tooltip {...args}>
+      {/* oxlint-disable-next-line jsx-a11y/no-autofocus -- story d'audit uniquement : affiche l'infobulle ouverte (exclue des Docs) */}
       <Button variant="secondary" autoFocus>
         Historique
       </Button>

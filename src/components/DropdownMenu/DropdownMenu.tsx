@@ -173,7 +173,9 @@ export function DropdownMenu({
     event.preventDefault();
   };
 
-  let actionIndex = -1;
+  // Position de chaque action parmi les actions (les séparateurs ne comptent pas), pour la navigation au clavier
+
+  const actionPositions = items.map((_, i) => items.slice(0, i + 1).filter(isAction).length - 1);
 
   return (
     <div ref={rootRef} className={cx(styles.root, className)}>
@@ -195,6 +197,7 @@ export function DropdownMenu({
       </Button>
 
       {open && (
+        // oxlint-disable-next-line jsx-a11y/interactive-supports-focus -- APG : le focus va sur les éléments du menu, pas sur le menu
         <div
           ref={menuRef}
           id={menuId}
@@ -206,10 +209,10 @@ export function DropdownMenu({
         >
           {items.map((item, i) => {
             if (!isAction(item)) {
+              // oxlint-disable-next-line jsx-a11y/control-has-associated-label -- séparateur décoratif non focalisable, pas un contrôle
               return <div key={`separator-${i}`} role="separator" className={styles.separator} />;
             }
-            actionIndex += 1;
-            const index = actionIndex;
+            const index = actionPositions[i];
             return (
               <button
                 key={`${item.label}-${i}`}

@@ -124,6 +124,7 @@ export type CardLinkProps = CardLinkAsLink | CardLinkAsButton;
 export function CardLink(props: CardLinkProps) {
   if (props.href !== undefined) {
     const { className, ...rest } = props as CardLinkAsLink;
+    // oxlint-disable-next-line jsx-a11y/anchor-has-content -- le contenu (children) arrive via ...rest
     return <a {...rest} className={cx(styles.link, className)} />;
   }
   const { className, type = 'button', ...rest } = props as CardLinkAsButton;

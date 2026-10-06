@@ -1,0 +1,7 @@
+dist
+storybook-static
+node_modules
+package-lock.json
+# Les tokens sont alignés à la main pour être lisibles ; leur validité est vérifiée par npm test
+tokens
+*.md
