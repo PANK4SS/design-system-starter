@@ -17,6 +17,7 @@ import {
 } from '../Chart';
 import chartStyles from '../Chart/Chart.module.css';
 import styles from './LineChart.module.css';
+import a11y from '../../utils/visuallyHidden.module.css';
 
 export interface LineChartProps extends ChartBaseProps {
   /**
@@ -145,7 +146,7 @@ export function LineChart({
                 />
               ))}
             </svg>
-            <span id={hintId} className={chartStyles.visuallyHidden}>
+            <span id={hintId} className={a11y.visuallyHidden}>
               {description ? `${description} ` : ''}Utilisez les flèches gauche et droite pour parcourir les valeurs.
             </span>
             {active !== null && (

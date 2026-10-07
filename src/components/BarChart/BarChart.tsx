@@ -17,6 +17,7 @@ import {
 } from '../Chart';
 import chartStyles from '../Chart/Chart.module.css';
 import styles from './BarChart.module.css';
+import a11y from '../../utils/visuallyHidden.module.css';
 
 export interface BarChartProps extends ChartBaseProps {
   /**
@@ -184,7 +185,7 @@ export function BarChart({
                 />
               ))}
             </svg>
-            <span id={hintId} className={chartStyles.visuallyHidden}>
+            <span id={hintId} className={a11y.visuallyHidden}>
               {description ? `${description} ` : ''}Utilisez les flèches gauche et droite pour parcourir les valeurs.
             </span>
             {tooltip}

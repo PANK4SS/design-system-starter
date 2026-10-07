@@ -6,6 +6,7 @@ import control from '../Field/control.module.css';
 import fieldStyles from '../Field/Field.module.css';
 import { Icon } from '../Icon';
 import styles from './SearchBar.module.css';
+import a11y from '../../utils/visuallyHidden.module.css';
 
 export type SearchBarSize = 'sm' | 'md' | 'lg';
 
@@ -78,7 +79,7 @@ export function SearchBar({
 
   return (
     <form role="search" aria-label={label} onSubmit={handleSubmit} className={cx(styles.searchBar, className)}>
-      <label htmlFor={controlId} className={cx(fieldStyles.label, !showLabel && fieldStyles.visuallyHidden)}>
+      <label htmlFor={controlId} className={cx(fieldStyles.label, !showLabel && a11y.visuallyHidden)}>
         {label}
       </label>
       <div className={cx(control.control, control[size], disabled && control.disabled)}>

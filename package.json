@@ -48,7 +48,7 @@
     "build:lib": "vite build --config vite.lib.config.ts && tsc -p tsconfig.build.json",
     "build": "npm run build:tokens && npm run build:lib && npm run build:manifest",
     "prepack": "npm run build",
-    "lint": "oxlint && stylelint \"src/**/*.css\" \".storybook/**/*.css\"",
+    "lint": "oxlint && stylelint \"src/**/*.css\" \".storybook/**/*.css\" && node scripts/check-css-classes.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "check": "npm test && npm run lint && npm run format:check && npm run typecheck",
