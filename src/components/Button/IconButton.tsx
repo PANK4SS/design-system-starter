@@ -1,10 +1,17 @@
 import type { LucideIcon } from 'lucide-react';
 import { cx } from '../../utils/cx';
 import { Icon } from '../Icon';
-import { Button, type ButtonProps } from './Button';
+import { Button, type ButtonProps, type ButtonSize, type ButtonVariant } from './Button';
 import styles from './Button.module.css';
 
-export interface IconButtonProps extends Omit<ButtonProps, 'children' | 'iconStart' | 'iconEnd' | 'fullWidth'> {
+export interface IconButtonProps extends Omit<
+  ButtonProps,
+  'children' | 'iconStart' | 'iconEnd' | 'fullWidth' | 'variant' | 'size'
+> {
+  /** Rôle visuel. Par défaut `ghost` : une icône seule est souvent une action secondaire. */
+  variant?: ButtonVariant;
+  /** Taille du bouton carré : `sm` (32px), `md` (40px), `lg` (48px). */
+  size?: ButtonSize;
   /** Le dessin, importé depuis `lucide-react`. */
   icon: LucideIcon;
   /**

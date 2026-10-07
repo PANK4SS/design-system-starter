@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "design-system": {
+      "command": "docker",
+      "args": ["compose", "run", "--rm", "-T", "node", "node", "mcp/server.mjs"]
+    }
+  }
+}

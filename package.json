@@ -1,12 +1,18 @@
 {
   "name": "design-system-starter",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Starter réutilisable de design system : tokens DTCG générés pour le web, Android et iOS",
   "private": true,
   "type": "module",
   "files": [
-    "dist"
+    "dist",
+    "mcp",
+    "config",
+    "!mcp/*.test.mjs"
   ],
+  "bin": {
+    "design-system-mcp": "./mcp/server.mjs"
+  },
   "sideEffects": [
     "**/*.css"
   ],
@@ -18,12 +24,20 @@
     "./styles.css": "./dist/lib/styles.css",
     "./tokens/*": "./dist/web/*",
     "./package.json": "./package.json",
-    "./ai/*": "./dist/ai/*"
+    "./ai/*": "./dist/ai/*",
+    "./stylelint-config": "./config/stylelint.json"
   },
   "peerDependencies": {
     "lucide-react": "^1.52.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.1",
+    "stylelint": "^17.16.0",
+    "stylelint-config-recommended": "^18.0.0",
+    "stylelint-declaration-strict-value": "^1.12.1",
+    "zod": "^4.6.5"
   },
   "scripts": {
     "test": "node scripts/check-tokens.mjs",
@@ -40,7 +54,8 @@
     "check": "npm test && npm run lint && npm run format:check && npm run typecheck",
     "changeset": "changeset",
     "version": "changeset version",
-    "build:manifest": "node scripts/build-manifest.mjs"
+    "build:manifest": "node scripts/build-manifest.mjs",
+    "test:mcp": "node --test \"mcp/**/*.test.mjs\""
   },
   "keywords": [],
   "author": "",
@@ -62,9 +77,6 @@
     "react-dom": "^19.3.0",
     "storybook": "^10.6.1",
     "style-dictionary": "^5.6.0",
-    "stylelint": "^17.16.0",
-    "stylelint-config-recommended": "^18.0.0",
-    "stylelint-declaration-strict-value": "^1.12.1",
     "typescript": "^7.0.2",
     "vite": "^8.3.3"
   }

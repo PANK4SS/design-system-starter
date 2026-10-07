@@ -18,7 +18,8 @@ check:
   script:
     - npm ci
     - npm run check # tokens + Oxlint + Stylelint + Prettier + TypeScript
-    - npm run build # tokens (web, Android, iOS) + librairie
+    - npm run build # tokens (web, Android, iOS) + librairie + manifeste IA
+    - npm run test:mcp # vérifications du serveur MCP (utilisent le manifeste)
 
 a11y:
   stage: a11y

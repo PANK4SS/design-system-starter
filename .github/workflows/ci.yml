@@ -10,7 +10,8 @@ jobs:
       - uses: actions/checkout@v4
       - run: npm ci
       - run: npm run check # tokens + Oxlint + Stylelint + Prettier + TypeScript
-      - run: npm run build # tokens (web, Android, iOS) + librairie
+      - run: npm run build # tokens (web, Android, iOS) + librairie + manifeste IA
+      - run: npm run test:mcp # vérifications du serveur MCP (utilisent le manifeste)
 
   a11y:
     needs: check

@@ -27,7 +27,8 @@ const rules = [
 const folders = [...readFileSync('src/index.ts', 'utf8').matchAll(/from '\.\/components\/(\w+)'/g)].map((m) => m[1]);
 const resolver = new builtinResolvers.FindExportedDefinitionsResolver();
 
-const typeText = (t) => (t ? (t.raw ?? t.name) : 'unknown');
+// Un type absent = une prop héritée d'un élément HTML (type, rows, placeholder…) avec une valeur par défaut
+const typeText = (t) => (t ? (t.raw ?? t.name) : 'attribut HTML natif');
 
 function readStories(folder) {
   const file = join('src/components', folder, `${folder}.stories.tsx`);
@@ -95,6 +96,22 @@ for (const folder of folders) {
   }
 }
 
+// ─── Tous les noms exportés par le paquet (pour détecter un import inventé) ───
+const exportsList = { values: new Set(), types: new Set() };
+for (const folder of [...folders, '../hooks']) {
+  const indexFile = join('src/components', folder, 'index.ts');
+  const code = readFileSync(indexFile, 'utf8');
+  for (const m of code.matchAll(/export (type )?\{([^}]+)\}/g)) {
+    for (const raw of m[2].split(',')) {
+      const name = raw
+        .trim()
+        .split(/\s+as\s+/)
+        .pop();
+      if (name) (m[1] ? exportsList.types : exportsList.values).add(name);
+    }
+  }
+}
+
 // ─── Tokens : valeurs claire et sombre fusionnées ────────────────────────────
 const light = JSON.parse(readFileSync('dist/web/json/light.json', 'utf8'));
 const dark = new Map(JSON.parse(readFileSync('dist/web/json/dark.json', 'utf8')).map((t) => [t.name, t]));
@@ -128,6 +145,7 @@ const manifest = {
     fonts: "L'application charge elle-même les polices (voir les tokens --font-family-*).",
   },
   rules,
+  exports: { values: [...exportsList.values].sort(), types: [...exportsList.types].sort() },
   components,
   tokens,
 };

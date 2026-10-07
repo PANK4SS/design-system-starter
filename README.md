@@ -70,6 +70,7 @@ Règles non automatisées :
 | Commande | Ce qu'elle vérifie |
 |---|---|
 | `npm test` | Les règles des tokens : alias valides, light/dark identiques, contrastes WCAG |
+| `npm run test:mcp` | Les vérifications du serveur MCP (après `npm run build`) |
 | `npm run lint` | **Oxlint** (React, accessibilité JSX) et **Stylelint** : toute couleur, taille, espacement, ombre ou z-index doit venir d'un token |
 | `npm run format` / `format:check` | **Prettier** : un seul style de code (les tokens JSON sont exclus, alignés à la main) |
 | `npm run typecheck` | TypeScript |
@@ -171,6 +172,31 @@ import { Search } from 'lucide-react';
 - **Polices** : l'app charge elle-même Inter et Orbitron (ex. Google Fonts), le design system ne fournit que leurs noms.
 - **Dépendances** : `react`, `react-dom` (19+) et `lucide-react` sont des *peerDependencies* : c'est l'app qui les installe, pour qu'il n'y ait qu'un seul React.
 - Les fichiers de tokens restent accessibles : `design-system-starter/tokens/css/light.css`, `…/tokens/js/light.js`.
+
+## IA : produire des interfaces avec un agent
+
+Le design system est fait pour être utilisé par des agents IA (Claude Code, Cursor…), avec trois briques générées depuis le code :
+
+| Brique | Rôle |
+|---|---|
+| `dist/ai/manifest.json` | Description complète : règles, composants (props, JSDoc, « À faire / À éviter »), tokens clair/sombre |
+| Skill `design-system` | Méthode de travail pour l'agent (`ai/skills/design-system/SKILL.md`) |
+| Serveur **MCP** `design-system` | Outils `get_rules`, `list_components`, `get_component`, `search_components`, `search_tokens` et surtout **`check_code`**, qui vérifie le code produit (composant ou token inventé, valeur de prop inexistante, prop obligatoire absente, valeur brute, élément natif, emoji) |
+
+**Dans ce dépôt**, Claude Code propose le serveur MCP automatiquement (`.mcp.json`, lancé via Docker) et lit `AGENTS.md`.
+
+**Dans une application** qui a installé le paquet :
+
+```bash
+claude mcp add design-system -- npx design-system-mcp                                   # le serveur MCP
+mkdir -p .claude/skills && cp -r node_modules/design-system-starter/dist/ai/skills/design-system .claude/skills/   # la skill
+```
+
+Et pour appliquer les mêmes règles CSS que le design system dans l'app (`.stylelintrc.json`) :
+
+```json
+{ "extends": ["design-system-starter/stylelint-config"] }
+```
 
 ## Composants (React)
 
