@@ -2,6 +2,7 @@ import StyleDictionary from 'style-dictionary';
 import { isThemed, isComponent } from './build/helpers.mjs';
 import { kotlinObject, kotlinInterface } from './build/kotlin.mjs';
 import { swiftEnum, swiftProtocol, swiftStruct, swiftSupport } from './build/swift.mjs';
+import { tokensJson } from './build/json.mjs';
 
 // ─── À adapter quand on clone le starter ──────────────────────────────────────
 const PREFIX = 'DS'; // préfixe des types générés : DSTokens, DSColorsLight…
@@ -20,7 +21,7 @@ StyleDictionary.registerTransform({
   },
 });
 
-for (const format of [kotlinObject, kotlinInterface, swiftEnum, swiftProtocol, swiftStruct, swiftSupport]) {
+for (const format of [kotlinObject, kotlinInterface, swiftEnum, swiftProtocol, swiftStruct, swiftSupport, tokensJson]) {
   StyleDictionary.registerFormat(format);
 }
 
@@ -63,6 +64,14 @@ for (const theme of themes) {
             },
           },
         ],
+      },
+
+      // 🤖 Pour les outils et les IA : tous les tokens du thème, avec leur nom de variable CSS (lu par le manifeste).
+      json: {
+        transformGroup: 'css',
+        expand: { include: ['typography'] },
+        buildPath: 'dist/web/json/',
+        files: [{ destination: `${theme}.json`, format: 'ds/tokens-json' }],
       },
 
       // 🌐 Web : constantes JavaScript (utile quand une lib, ex. de graphiques, veut les valeurs en JS).

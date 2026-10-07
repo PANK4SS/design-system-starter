@@ -21,6 +21,7 @@ export interface ButtonProps extends ComponentProps<'button'> {
   iconEnd?: ReactNode;
 }
 
+/** Déclenche une action : enregistrer, envoyer, supprimer… Pour naviguer vers une page, utiliser Link. */
 export function Button({
   variant = 'primary',
   size = 'md',

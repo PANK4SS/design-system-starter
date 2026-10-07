@@ -3,6 +3,7 @@
 // Fondations
 export * from './components/Icon';
 export * from './components/Stack';
+export * from './components/VisuallyHidden';
 
 // Actions
 export * from './components/Button';

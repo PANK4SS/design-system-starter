@@ -17,7 +17,8 @@
     },
     "./styles.css": "./dist/lib/styles.css",
     "./tokens/*": "./dist/web/*",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./ai/*": "./dist/ai/*"
   },
   "peerDependencies": {
     "lucide-react": "^1.52.0",
@@ -31,14 +32,15 @@
     "storybook": "npm run build:tokens && storybook dev --port 6006 --host 0.0.0.0 --no-open",
     "build:storybook": "npm run build:tokens && storybook build",
     "build:lib": "vite build --config vite.lib.config.ts && tsc -p tsconfig.build.json",
-    "build": "npm run build:tokens && npm run build:lib",
+    "build": "npm run build:tokens && npm run build:lib && npm run build:manifest",
     "prepack": "npm run build",
     "lint": "oxlint && stylelint \"src/**/*.css\" \".storybook/**/*.css\"",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "check": "npm test && npm run lint && npm run format:check && npm run typecheck",
     "changeset": "changeset",
-    "version": "changeset version"
+    "version": "changeset version",
+    "build:manifest": "node scripts/build-manifest.mjs"
   },
   "keywords": [],
   "author": "",
@@ -56,6 +58,7 @@
     "playwright": "1.49.1",
     "prettier": "^3.9.9",
     "react": "^19.3.0",
+    "react-docgen": "^8.0.4",
     "react-dom": "^19.3.0",
     "storybook": "^10.6.1",
     "style-dictionary": "^5.6.0",

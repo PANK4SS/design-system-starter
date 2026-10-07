@@ -19,6 +19,7 @@ export interface IconProps {
   className?: string;
 }
 
+/** Icône SVG de la bibliothèque Lucide, aux tailles et épaisseurs de trait des tokens. Décorative sauf si `label` est fourni. */
 export function Icon({ icon: Glyph, size = 'md', stroke = 'regular', label, className }: IconProps) {
   return (
     <Glyph

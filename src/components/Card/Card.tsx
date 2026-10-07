@@ -67,6 +67,7 @@ export interface CardHeaderProps extends Omit<HTMLAttributes<HTMLDivElement>, 't
   titleAs?: 'h2' | 'h3' | 'h4';
 }
 
+/** En-tête de carte : titre, sous-titre optionnel et zone d'actions (ex. un Badge ou un IconButton). */
 export function CardHeader({ title, subtitle, actions, titleAs: Heading = 'h3', className, ...rest }: CardHeaderProps) {
   return (
     <div {...rest} className={cx(styles.header, className)}>
@@ -83,6 +84,7 @@ export function CardHeader({ title, subtitle, actions, titleAs: Heading = 'h3', 
 
 export type CardBodyProps = HTMLAttributes<HTMLDivElement>;
 
+/** Contenu principal de la carte. */
 export function CardBody({ className, ...rest }: CardBodyProps) {
   return <div {...rest} className={cx(styles.body, className)} />;
 }
@@ -92,6 +94,7 @@ export interface CardFooterProps extends HTMLAttributes<HTMLDivElement> {
   align?: 'start' | 'end' | 'between';
 }
 
+/** Pied de carte, généralement des boutons d'action alignés. */
 export function CardFooter({ align = 'end', className, ...rest }: CardFooterProps) {
   return <div {...rest} className={cx(styles.footer, styles[`align-${align}`], className)} />;
 }
@@ -121,6 +124,7 @@ type CardLinkAsButton = ButtonHTMLAttributes<HTMLButtonElement> & { href?: undef
  */
 export type CardLinkProps = CardLinkAsLink | CardLinkAsButton;
 
+/** Rend toute la carte cliquable : à placer dans le titre. Avec `href`, un vrai lien ; sans, un vrai bouton. */
 export function CardLink(props: CardLinkProps) {
   if (props.href !== undefined) {
     const { className, ...rest } = props as CardLinkAsLink;
