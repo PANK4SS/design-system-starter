@@ -1,6 +1,7 @@
 {
   "button": {
-    "radius":     { "$value": "{radius.md}",          "$type": "dimension" },
+    "radius":      { "$value": "{radius.md}",          "$type": "dimension" },
+    "radius-pill": { "$value": "{radius.full}",        "$type": "dimension" },
     "focus-ring": { "$value": "{color.border.focus}", "$type": "color" },
     "primary": {
       "background":       { "$value": "{color.action.primary}",       "$type": "color" },

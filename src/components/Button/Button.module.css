@@ -12,7 +12,7 @@
   height: var(--_height);
   padding-inline: var(--_padding-x);
   border: 1px solid var(--_border, transparent);
-  border-radius: var(--button-radius);
+  border-radius: var(--_radius, var(--button-radius));
 
   background: var(--_bg, transparent);
   color: var(--_text);
@@ -92,6 +92,11 @@
 
 .fullWidth {
   width: 100%;
+}
+
+/* Forme pilule : bords entièrement ronds */
+.pill {
+  --_radius: var(--button-radius-pill);
 }
 
 /* Bouton carré, utilisé par IconButton */

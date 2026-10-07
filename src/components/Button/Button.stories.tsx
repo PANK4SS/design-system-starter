@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { fn } from 'storybook/test';
-import { Settings, Trash2, X } from 'lucide-react';
+import { Plus, Settings, Trash2, X } from 'lucide-react';
 import { Button } from './Button';
 import { IconButton } from './IconButton';
 
@@ -18,6 +18,7 @@ const meta = {
   argTypes: {
     variant: { control: 'inline-radio' },
     size: { control: 'inline-radio' },
+    shape: { control: 'inline-radio' },
     iconStart: { control: false },
     iconEnd: { control: false },
   },
@@ -87,6 +88,32 @@ export const AllVariants: Story = {
       <Button {...args} variant="danger">
         Danger
       </Button>
+    </div>
+  ),
+};
+
+export const Shapes: Story = {
+  name: 'Formes',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          '`rounded` par défaut ; `pill` pour les filtres et les actions flottantes. Avec `IconButton`, `pill` donne un bouton rond.',
+      },
+    },
+  },
+  render: (args) => (
+    <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
+      <Button {...args} shape="rounded">
+        Arrondi
+      </Button>
+      <Button {...args} shape="pill">
+        Pilule
+      </Button>
+      <Button {...args} variant="secondary" shape="pill">
+        Filtre actif
+      </Button>
+      <IconButton icon={Plus} label="Ajouter un site" variant="primary" shape="pill" size="lg" />
     </div>
   ),
 };

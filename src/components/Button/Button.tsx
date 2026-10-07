@@ -4,6 +4,7 @@ import styles from './Button.module.css';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
 export type ButtonSize = 'sm' | 'md' | 'lg';
+export type ButtonShape = 'rounded' | 'pill';
 
 // ComponentProps<'button'> inclut tous les attributs d'un <button>, et la `ref` (React 19).
 export interface ButtonProps extends ComponentProps<'button'> {
@@ -15,6 +16,11 @@ export interface ButtonProps extends ComponentProps<'button'> {
   loading?: boolean;
   /** Prend toute la largeur disponible (utile sur mobile). */
   fullWidth?: boolean;
+  /**
+   * Forme : `rounded` (coins légèrement arrondis, par défaut) ou `pill` (bords entièrement ronds :
+   * filtres, actions flottantes). Avec IconButton, `pill` donne un bouton rond.
+   */
+  shape?: ButtonShape;
   /** Icône affichée avant le texte. */
   iconStart?: ReactNode;
   /** Icône affichée après le texte. */
@@ -27,6 +33,7 @@ export function Button({
   size = 'md',
   loading = false,
   fullWidth = false,
+  shape = 'rounded',
   iconStart,
   iconEnd,
   disabled,
@@ -40,6 +47,7 @@ export function Button({
     styles[variant],
     styles[size],
     fullWidth && styles.fullWidth,
+    shape === 'pill' && styles.pill,
     loading && styles.loading,
     className,
   );
