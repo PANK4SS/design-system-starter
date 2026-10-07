@@ -12,3 +12,15 @@ services:
     ports:
       - '6006:6006'
     command: npm run storybook
+
+  # Audit d'accessibilité de toutes les stories : docker compose run --rm a11y
+  # La version de l'image DOIT correspondre à la version du paquet « playwright » (package.json).
+  a11y:
+    image: mcr.microsoft.com/playwright:v1.49.1-noble
+    working_dir: /app
+    user: "1000:1000"
+    environment:
+      HOME: /tmp
+    volumes:
+      - ./:/app
+    command: sh -c "npm run build:storybook && node scripts/test-a11y.mjs"
