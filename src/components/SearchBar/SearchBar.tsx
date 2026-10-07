@@ -9,6 +9,7 @@ import styles from './SearchBar.module.css';
 import a11y from '../../utils/visuallyHidden.module.css';
 
 export type SearchBarSize = 'sm' | 'md' | 'lg';
+export type SearchBarShape = 'rounded' | 'pill';
 
 export interface SearchBarProps extends Omit<
   ComponentProps<'input'>,
@@ -30,6 +31,8 @@ export interface SearchBarProps extends Omit<
   onClear?: () => void;
   /** Densité : `sm` dans une barre d'outils, `md` par défaut, `lg` pour une recherche mise en avant. */
   size?: SearchBarSize;
+  /** Forme : `rounded` (par défaut) ou `pill` (bords entièrement ronds, ex. recherche principale d'un en-tête). */
+  shape?: SearchBarShape;
   /** Classe ajoutée sur le `<form>`. */
   className?: string;
 }
@@ -47,6 +50,7 @@ export function SearchBar({
   onSearch,
   onClear,
   size = 'md',
+  shape = 'rounded',
   id,
   disabled,
   placeholder = 'Rechercher…',
@@ -82,7 +86,9 @@ export function SearchBar({
       <label htmlFor={controlId} className={cx(fieldStyles.label, !showLabel && a11y.visuallyHidden)}>
         {label}
       </label>
-      <div className={cx(control.control, control[size], disabled && control.disabled)}>
+      <div
+        className={cx(control.control, control[size], shape === 'pill' && control.pill, disabled && control.disabled)}
+      >
         <span className={control.adornment} aria-hidden="true">
           <Icon icon={Search} size="sm" />
         </span>
@@ -98,7 +104,12 @@ export function SearchBar({
           className={cx(control.native, styles.input)}
         />
         {current && !disabled && (
-          <button type="button" className={styles.clear} onClick={handleClear} aria-label="Effacer la recherche">
+          <button
+            type="button"
+            className={cx(styles.clear, shape === 'pill' && styles.clearRound)}
+            onClick={handleClear}
+            aria-label="Effacer la recherche"
+          >
             <Icon icon={X} size="sm" />
           </button>
         )}

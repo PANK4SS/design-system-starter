@@ -15,6 +15,7 @@ const meta = {
   },
   argTypes: {
     size: { control: 'inline-radio' },
+    shape: { control: 'inline-radio' },
   },
   decorators: [
     (Story) => (
@@ -61,6 +62,18 @@ export const Sizes: Story = {
       <SearchBar {...args} size="sm" label="Recherche (petite)" defaultValue="Parking" />
       <SearchBar {...args} size="md" label="Recherche (moyenne)" defaultValue="Parking" />
       <SearchBar {...args} size="lg" label="Recherche (grande)" defaultValue="Parking" />
+    </div>
+  ),
+};
+
+/** `pill` : bords entièrement ronds, par exemple pour la recherche principale d'un en-tête. */
+export const Shapes: Story = {
+  name: 'Formes',
+  render: (args) => (
+    <div style={{ display: 'grid', gap: 16 }}>
+      <SearchBar {...args} shape="rounded" label="Recherche (arrondie)" defaultValue="Parking" />
+      <SearchBar {...args} shape="pill" label="Recherche (pilule)" defaultValue="Parking" />
+      <SearchBar {...args} shape="pill" size="lg" label="Recherche (pilule, grande)" />
     </div>
   ),
 };

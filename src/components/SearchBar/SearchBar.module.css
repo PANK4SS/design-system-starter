@@ -35,6 +35,11 @@
   transition: background-color var(--duration-fast) var(--easing-standard);
 }
 
+/* Dans une barre pilule, le bouton d'effacement est rond */
+.clearRound {
+  border-radius: var(--radius-full);
+}
+
 .clear:hover {
   background: var(--color-action-subtle-hover);
   color: var(--color-icon-default);

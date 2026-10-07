@@ -12,7 +12,7 @@
   min-height: var(--_height);
   padding-inline: var(--_padding-x);
   border: 1px solid var(--_border, var(--color-border-strong));
-  border-radius: var(--radius-md);
+  border-radius: var(--_radius, var(--radius-md));
 
   background: var(--color-background-page);
   color: var(--color-text-default);
@@ -39,6 +39,12 @@
 .invalid,
 .invalid:hover:not(.disabled) {
   --_border: var(--color-feedback-danger);
+}
+
+/* Forme pilule : bords entièrement ronds, et un peu plus d'espace pour que le contenu ne touche pas l'arrondi */
+.pill {
+  --_radius: var(--radius-full);
+  padding-inline: calc(var(--_padding-x) + var(--space-1));
 }
 
 .readOnly {
