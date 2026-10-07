@@ -93,6 +93,10 @@
         "$value": "#EAF2FC",
         "$type": "color"
       },
+      "300": {
+        "$value": "#5D9DEA",
+        "$type": "color"
+      },
       "400": {
         "$value": "#3987E5",
         "$type": "color"

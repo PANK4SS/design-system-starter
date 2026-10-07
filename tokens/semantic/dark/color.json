@@ -76,7 +76,7 @@
         "$type": "color"
       },
       "info": {
-        "$value": "{color.blue.400}",
+        "$value": "{color.blue.300}",
         "$type": "color"
       },
       "warning": {
