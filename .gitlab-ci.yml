@@ -1,0 +1,30 @@
+# CI GitLab : chaque push vérifie les tokens, le code, les types, les builds et l'accessibilité.
+stages:
+  - check
+  - a11y
+
+default:
+  cache:
+    key:
+      files: [package-lock.json]
+    paths: [.npm/]
+
+variables:
+  npm_config_cache: '$CI_PROJECT_DIR/.npm'
+
+check:
+  stage: check
+  image: node:22
+  script:
+    - npm ci
+    - npm run check # tokens + Oxlint + Stylelint + Prettier + TypeScript
+    - npm run build # tokens (web, Android, iOS) + librairie
+
+a11y:
+  stage: a11y
+  # La version de l'image DOIT correspondre au paquet « playwright » de package.json
+  image: mcr.microsoft.com/playwright:v1.49.1-noble
+  script:
+    - npm ci
+    - npm run build:storybook
+    - node scripts/test-a11y.mjs

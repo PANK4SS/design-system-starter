@@ -18,7 +18,7 @@ services:
   a11y:
     image: mcr.microsoft.com/playwright:v1.49.1-noble
     working_dir: /app
-    user: "1000:1000"
+    user: '1000:1000'
     environment:
       HOME: /tmp
     volumes:

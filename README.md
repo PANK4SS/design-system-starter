@@ -65,6 +65,31 @@ Règles non automatisées :
 - On **ajoute** des tokens, on ne les remplace pas. Un token à retirer est d'abord déprécié.
 - Graphiques : les couleurs `chart.categorical.1` à `5` s'utilisent **dans l'ordre** (ordre validé pour les daltoniens), et toujours avec une légende ou des libellés.
 
+## Qualité : les garde-fous automatiques
+
+| Commande | Ce qu'elle vérifie |
+|---|---|
+| `npm test` | Les règles des tokens : alias valides, light/dark identiques, contrastes WCAG |
+| `npm run lint` | **Oxlint** (React, accessibilité JSX) et **Stylelint** : toute couleur, taille, espacement, ombre ou z-index doit venir d'un token |
+| `npm run format` / `format:check` | **Prettier** : un seul style de code (les tokens JSON sont exclus, alignés à la main) |
+| `npm run typecheck` | TypeScript |
+| `npm run check` | Tout ce qui précède |
+| `docker compose run --rm a11y` | Construit Storybook et audite **chaque story** en clair et en sombre avec **axe** |
+
+Une exception à une règle se signale **à l'endroit précis, avec sa raison** :
+`// oxlint-disable-next-line <règle> -- raison` ou `/* stylelint-disable-next-line <règle> -- raison */`.
+
+La **CI** (`.gitlab-ci.yml`, `.github/workflows/ci.yml`) lance `check`, `build` et l'audit d'accessibilité à chaque push.
+
+### Versions (Changesets)
+
+Chaque modification s'accompagne d'un changeset qui indique son type SemVer (voir `.changeset/README.md`) :
+
+```bash
+docker compose run --rm node npx changeset      # décrire la modification
+docker compose run --rm node npm run version    # nouvelle version + CHANGELOG.md
+```
+
 ## Ce que génère le build
 
 | Plateforme | Fichiers | Contenu |

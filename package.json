@@ -1,6 +1,6 @@
 {
   "name": "design-system-starter",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Starter réutilisable de design system : tokens DTCG générés pour le web, Android et iOS",
   "private": true,
   "type": "module",
@@ -36,7 +36,9 @@
     "lint": "oxlint && stylelint \"src/**/*.css\" \".storybook/**/*.css\"",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "check": "npm test && npm run lint && npm run format:check && npm run typecheck"
+    "check": "npm test && npm run lint && npm run format:check && npm run typecheck",
+    "changeset": "changeset",
+    "version": "changeset version"
   },
   "keywords": [],
   "author": "",
