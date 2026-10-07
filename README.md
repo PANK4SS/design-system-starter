@@ -1,258 +1,72 @@
 # design-system-starter
 
-Un **starter réutilisable** de design system : on le clone, on l'adapte, et on a une base solide pour n'importe quel projet. Les **design tokens** (couleurs, espacements, typographie, icônes, animations…) sont écrits une seule fois en JSON, vérifiés automatiquement, puis générés pour le **web**, **Android** et **iOS** avec [Style Dictionary](https://styledictionary.com).
+Un **starter réutilisable de design system** : on le clone, on l'adapte à une marque, et on dispose d'une base complète, accessible et vérifiée automatiquement pour n'importe quel projet.
 
-## Adapter le starter à un projet
+- **Design tokens** au format standard DTCG, avec thèmes clair et sombre, générés pour le **web**, **Android** (Compose, XML) et **iOS** (SwiftUI)
+- **Plus de 30 composants React** accessibles (formulaires, superpositions, navigation, tableaux, graphiques…), documentés dans **Storybook**
+- **Garde-fous automatiques** : tokens obligatoires dans le CSS, contrastes WCAG, audit d'accessibilité de chaque composant, CI GitLab et GitHub
+- **Prêt pour les agents IA** : manifeste généré depuis le code, skill, et serveur **MCP** qui vérifie le code produit
 
-1. Renommer : `name` et `description` dans `package.json`, puis les constantes `PREFIX` et `ANDROID_PACKAGE` en haut de `build-tokens.mjs`.
-2. Remplacer la **palette d'exemple** (jaune de marque, polices Orbitron et Inter) dans `tokens/primitive/`.
-3. Mettre à jour les sémantiques dans `tokens/semantic/light` et `dark`, puis lancer `npm test` pour revérifier les contrastes.
+```mermaid
+flowchart LR
+    T["Tokens JSON"] --> B["Build"]
+    C["Composants React"] --> B
+    B --> W["Web : CSS, JS, librairie"]
+    B --> M["Android et iOS"]
+    B --> S["Storybook"]
+    B --> I["Manifeste IA + MCP"]
+```
 
-## Prérequis
+## Démarrage rapide
 
-Uniquement **Docker**. Node.js et npm tournent dans un conteneur (voir `docker-compose.yml`), rien n'est installé sur la machine.
+Seul **Docker** est nécessaire : Node.js et les outils tournent dans des conteneurs.
 
 ```bash
-docker compose run --rm node npm install          # installer les dépendances
-docker compose run --rm node npm test             # vérifier les règles des tokens
-docker compose run --rm node npm run build:tokens # vérifier PUIS générer dist/
-docker compose run --rm node npm run typecheck    # vérifier les types TypeScript
-docker compose run --rm node npm run build        # tokens + librairie installable (dist/lib)
-docker compose up storybook                       # Storybook sur http://localhost:6006
+docker compose run --rm node npm install    # dépendances
+docker compose run --rm node npm run build  # tokens + librairie + manifeste IA
+docker compose up storybook                 # http://localhost:6006
 ```
 
-## Structure
-
-```
-tokens/
-├── primitive/            # la palette brute, commune à tous les thèmes
-│   ├── color.json        #   couleurs (marque, gris, statuts, graphiques)
-│   ├── spacing.json      #   échelle de 4px
-│   ├── font.json         #   familles, tailles, graisses, interlignes
-│   ├── radius.json       #   arrondis
-│   ├── icon.json         #   tailles et épaisseurs de trait des icônes
-│   └── motion.json       #   durées et courbes d'animation (easing)
-├── semantic/             # les rôles
-│   ├── typography.json   #   styles de texte composites, communs à tous les thèmes
-│   ├── light/color.json  #   couleurs du thème clair
-│   └── dark/color.json   #   mêmes clés que light, valeurs différentes
-└── component/            # component tokens, un fichier par composant (web uniquement)
-src/
-├── components/<Nom>/     # un dossier par composant React
-│   ├── <Nom>.tsx         #   le composant et ses props (son API)
-│   ├── <Nom>.module.css  #   ses styles : uniquement des var(--token)
-│   ├── <Nom>.stories.tsx #   sa documentation vivante dans Storybook
-│   └── index.ts          #   ce qu'il exporte
-└── index.ts              # point d'entrée : tout ce qu'une app peut importer
-.storybook/               # configuration de Storybook (thème clair/sombre, polices)
-build-tokens.mjs          # configuration du build (plateformes, fichiers)
-build/                    # formats maison : kotlin.mjs (Compose), swift.mjs (SwiftUI)
-scripts/check-tokens.mjs  # les tests (npm test)
-dist/                     # GÉNÉRÉ, ne jamais modifier à la main
-```
-
-## Règles (vérifiées par `npm test`)
-
-| Règle | Pourquoi |
-|---|---|
-| Chaque alias `{…}` pointe vers un token qui existe | Un alias cassé produirait une valeur vide |
-| `semantic/light` et `semantic/dark` ont **exactement les mêmes clés** | Sinon un composant casse dans l'un des deux thèmes |
-| Chaque paire texte/fond déclarée atteint **4,5:1** (WCAG AA) | Lisibilité et accessibilité. Les paires sont listées en haut de `scripts/check-tokens.mjs` |
-
-`npm run build:tokens` lance les tests d'abord : **on ne peut pas générer des tokens invalides**.
-
-Règles non automatisées :
-- On **ajoute** des tokens, on ne les remplace pas. Un token à retirer est d'abord déprécié.
-- Graphiques : les couleurs `chart.categorical.1` à `5` s'utilisent **dans l'ordre** (ordre validé pour les daltoniens), et toujours avec une légende ou des libellés.
-
-## Qualité : les garde-fous automatiques
-
-| Commande | Ce qu'elle vérifie |
-|---|---|
-| `npm test` | Les règles des tokens : alias valides, light/dark identiques, contrastes WCAG |
-| `npm run test:mcp` | Les vérifications du serveur MCP (après `npm run build`) |
-| `npm run lint` | **Oxlint** (React, accessibilité JSX) et **Stylelint** : toute couleur, taille, espacement, ombre ou z-index doit venir d'un token |
-| `npm run format` / `format:check` | **Prettier** : un seul style de code (les tokens JSON sont exclus, alignés à la main) |
-| `npm run typecheck` | TypeScript |
-| `npm run check` | Tout ce qui précède |
-| `docker compose run --rm a11y` | Construit Storybook et audite **chaque story** en clair et en sombre avec **axe** |
-
-Une exception à une règle se signale **à l'endroit précis, avec sa raison** :
-`// oxlint-disable-next-line <règle> -- raison` ou `/* stylelint-disable-next-line <règle> -- raison */`.
-
-La **CI** (`.gitlab-ci.yml`, `.github/workflows/ci.yml`) lance `check`, `build` et l'audit d'accessibilité à chaque push.
-
-### Versions (Changesets)
-
-Chaque modification s'accompagne d'un changeset qui indique son type SemVer (voir `.changeset/README.md`) :
-
-```bash
-docker compose run --rm node npx changeset      # décrire la modification
-docker compose run --rm node npm run version    # nouvelle version + CHANGELOG.md
-```
-
-## Ce que génère le build
-
-| Plateforme | Fichiers | Contenu |
-|---|---|---|
-| 🌐 Web, CSS | `web/css/light.css`, `dark.css` | Toutes les variables. `dark.css` ne redéfinit que les couleurs de thème, sous `[data-theme="dark"]` |
-| 🌐 Web, JS | `web/js/light.js`, `dark.js` | Constantes, un fichier complet par thème |
-| 🤖 Android Compose | `android/compose/*.kt` | `DSTokens` (commun), `DSColors` (interface), `DSColorsLight` / `DSColorsDark` |
-| 🤖 Android XML | `android/xml/values/`, `values-night/` | `colors.xml`, `dimens.xml`. Android choisit `values-night` tout seul en mode sombre |
-| 🍎 iOS SwiftUI | `ios/*.swift` | `DSTokens` (commun), `DSColors` (protocole), `DSColorsLight` / `DSColorsDark`, `DSSupport` |
-
-Tous les types sont couverts sur toutes les plateformes : couleurs, dimensions, polices, graisses, nombres, durées, courbes d'animation et typographies composites.
-
-### Utilisation
-
-**Web**
-```html
-<link rel="stylesheet" href="dist/web/css/light.css" />
-<link rel="stylesheet" href="dist/web/css/dark.css" />
-<html data-theme="dark"> <!-- active le thème sombre -->
-```
-```css
-.button {
-  background: var(--color-action-primary);
-  font-family: var(--typography-label-md-font-family);
-  font-size: var(--typography-label-md-font-size);
-  transition: background var(--duration-fast) var(--easing-standard);
-}
-```
-
-**Android Compose**
-```kotlin
-val colors: DSColors = if (isSystemInDarkTheme()) DSColorsDark else DSColorsLight
-Text(
-    "Bonjour",
-    color = colors.colorTextDefault,
-    style = DSTokens.typographyHeadingLg.copy(fontFamily = orbitron), // la police vient des ressources de l'app
-)
-```
-
-**iOS SwiftUI**
-```swift
-@Environment(\.colorScheme) var scheme
-var colors: any DSColors { scheme == .dark ? DSColorsDark() : DSColorsLight() }
-
-Text("Bonjour")
-    .font(DSTokens.typographyHeadingLg.font)
-    .lineSpacing(DSTokens.typographyHeadingLg.lineSpacing)
-    .foregroundStyle(colors.colorTextDefault)
-```
-
-### Limites connues
-
-- **Polices sur mobile** : seul le premier nom de la liste est utilisé (`"Orbitron"`), le mobile n'a pas de police de secours. Les fichiers de police doivent être ajoutés à l'app. En Compose, la `FontFamily` dépend des ressources de l'app : les `TextStyle` sont générés sans police, à compléter avec `.copy(fontFamily = …)`.
-- **Code natif non compilé ici** : le Kotlin et le Swift générés ne sont pas compilés dans ce dépôt (il faudrait Android Studio / Xcode). C'est le CI de chaque app qui le compile en important `dist/`.
-- **Typographie en CSS** : chaque style est éclaté en 5 variables (`-font-family`, `-font-size`, `-font-weight`, `-line-height`, `-letter-spacing`), car la propriété raccourcie `font` ne sait pas porter le `letter-spacing`.
-- Le warning `filtered out token references` sur `dark.css` est **attendu** : les couleurs dark pointent vers des primitifs définis dans `light.css`, qui doit donc toujours être chargé.
-
-## Utiliser le design system dans un projet
-
-Le paquet se construit avec `npm run build` (tokens + librairie dans `dist/`). Pour l'installer dans une app :
-
-```bash
-docker compose run --rm node npm pack          # produit design-system-starter-0.1.0.tgz
-# dans l'app :
-npm install ../chemin/vers/design-system-starter-0.1.0.tgz lucide-react
-```
-
-(ou le publier sur un registre npm privé, GitHub Packages / GitLab Package Registry.)
+## Utilisation dans une application
 
 ```tsx
-// Une seule fois, à la racine de l'app : tokens + styles des composants + styles de base
-import 'design-system-starter/styles.css';
+import 'design-system-starter/styles.css'; // une fois, à la racine
 
-import { Button, Input, ToastProvider, useToast } from 'design-system-starter';
-import { Search } from 'lucide-react';
+import { Button, Input, Stack } from 'design-system-starter';
+
+<Stack gap="4">
+  <Input label="Adresse e-mail" type="email" />
+  <Button variant="primary">Continuer</Button>
+</Stack>;
 ```
 
-- **Thème sombre** : poser `data-theme="dark"` sur `<html>`.
-- **Polices** : l'app charge elle-même Inter et Orbitron (ex. Google Fonts), le design system ne fournit que leurs noms.
-- **Dépendances** : `react`, `react-dom` (19+) et `lucide-react` sont des *peerDependencies* : c'est l'app qui les installe, pour qu'il n'y ait qu'un seul React.
-- Les fichiers de tokens restent accessibles : `design-system-starter/tokens/css/light.css`, `…/tokens/js/light.js`.
+Thème sombre : `<html data-theme="dark">`. Installation détaillée : [Versions et publication](docs/09-versions-et-publication.md).
 
-## IA : produire des interfaces avec un agent
+## Documentation
 
-Le design system est fait pour être utilisé par des agents IA (Claude Code, Cursor…), avec trois briques générées depuis le code :
-
-| Brique | Rôle |
+| Guide | Contenu |
 |---|---|
-| `dist/ai/manifest.json` | Description complète : règles, composants (props, JSDoc, « À faire / À éviter »), tokens clair/sombre |
-| Skill `design-system` | Méthode de travail pour l'agent (`ai/skills/design-system/SKILL.md`) |
-| Serveur **MCP** `design-system` | Outils `get_rules`, `list_components`, `get_component`, `search_components`, `search_tokens` et surtout **`check_code`**, qui vérifie le code produit (composant ou token inventé, valeur de prop inexistante, prop obligatoire absente, valeur brute, élément natif, emoji) |
+| [Démarrage](docs/01-demarrage.md) | Prérequis, commandes, structure du dépôt |
+| [Architecture](docs/02-architecture.md) | Vue d'ensemble, du JSON jusqu'aux applications |
+| [Tokens](docs/03-tokens.md) | Les trois niveaux, les règles, ajouter un token |
+| [Thèmes](docs/04-themes.md) | Clair et sombre : web, Storybook, mobile |
+| [Build multiplateforme](docs/05-build-multiplateforme.md) | Style Dictionary, sorties, ajouter une plateforme |
+| [Composants](docs/06-composants.md) | Catalogue, conventions, ajouter un composant |
+| [Qualité](docs/07-qualite.md) | Garde-fous et intégration continue |
+| [IA et MCP](docs/08-ia-et-mcp.md) | Manifeste, skill, serveur MCP |
+| [Versions et publication](docs/09-versions-et-publication.md) | Changesets, paquet, installation |
+| [Adapter le starter](docs/10-adapter-le-starter.md) | Personnaliser pour un nouveau projet |
+| [Décisions](docs/11-decisions.md) | Les choix d'architecture et leurs raisons |
 
-**Dans ce dépôt**, Claude Code propose le serveur MCP automatiquement (`.mcp.json`, lancé via Docker) et lit `AGENTS.md`.
+La documentation de chaque composant (props, exemples, règles d'usage) est dans **Storybook**. Les agents IA qui travaillent sur ce dépôt lisent [`AGENTS.md`](AGENTS.md).
 
-**Dans une application** qui a installé le paquet :
+## Commandes principales
 
-```bash
-claude mcp add design-system -- npx design-system-mcp                                   # le serveur MCP
-mkdir -p .claude/skills && cp -r node_modules/design-system-starter/dist/ai/skills/design-system .claude/skills/   # la skill
-```
-
-Et pour appliquer les mêmes règles CSS que le design system dans l'app (`.stylelintrc.json`) :
-
-```json
-{ "extends": ["design-system-starter/stylelint-config"] }
-```
-
-## Composants (React)
-
-Les composants sont en **React + TypeScript**, documentés dans **Storybook**. Les tokens sont multiplateformes, les composants non : un composant mobile natif devrait être réécrit en Compose ou en SwiftUI.
-
-Règles d'un composant :
-- Ses styles n'utilisent **que** des tokens (`var(--…)`), jamais de valeur brute.
-- Il est « bête » : il affiche ce qu'on lui donne, sans logique métier ni appel API.
-- Accessibilité : focus visible au clavier, contrastes vérifiés, onglet **Accessibility** de Storybook sans erreur.
-- Le thème se change via `data-theme` posé sur `<html>` (les component tokens sont déclarés sur `:root`).
-
-Il est aussi « bête » côté données : un `Table` trie quand on lui dit de trier (`sort` / `onSortChange`), il ne trie pas lui-même.
-
-| Famille | Composants |
+| Commande | Rôle |
 |---|---|
-| Fondations | `Icon` (icônes SVG [Lucide](https://lucide.dev/icons)), `Stack` |
-| Actions | `Button`, `IconButton` |
-| Formulaires | `Field` (base commune), `Input`, `Textarea`, `Select`, `Checkbox`, `RadioGroup` / `Radio`, `Switch`, `SearchBar` |
-| Affichage | `Card` (+ `CardHeader`, `CardBody`, `CardFooter`, `CardMedia`, `CardLink`), `Badge`, `Avatar`, `Divider` |
-| Feedback | `Alert`, `Toast` (`ToastProvider` + `useToast`), `Spinner`, `Skeleton`, `ProgressBar` |
-| Superpositions | `Modal`, `Tooltip`, `DropdownMenu` |
-| Navigation | `Link`, `Tabs`, `Breadcrumb`, `Pagination` |
-| Données | `Table`, `StatTile`, `BarChart`, `LineChart` |
-| Hooks | `useControllableState`, `useClickOutside` |
+| `docker compose run --rm node npm run check` | Toutes les vérifications (tokens, lint, formatage, types) |
+| `docker compose run --rm node npm run build` | Tokens, librairie et manifeste IA dans `dist/` |
+| `docker compose run --rm a11y` | Audit d'accessibilité de toutes les stories |
+| `docker compose run --rm node npx changeset` | Décrire une modification pour la prochaine version |
 
-```tsx
-import { Button, Input, useToast } from 'design-system-starter';
-import { Search } from 'lucide-react';
-```
-
-### Limites connues des composants
-
-- **Tooltip et DropdownMenu** sont positionnés dans leur conteneur, sans « portail » ni détection de collision : un parent en `overflow: hidden` peut les couper.
-- **Modal** utilise le piège de focus natif de `<dialog>` : après le dernier élément, le focus passe brièvement par la barre du navigateur avant de revenir dans la modale (il n'atteint jamais la page derrière).
-- **Graphiques** : valeurs positives uniquement, pas de barres horizontales.
-- **Composants mobiles** : aucun. Les tokens sont générés pour iOS et Android, mais les composants sont en React (web).
-
-## Ajouter une autre plateforme
-
-Chaque plateforme est un bloc dans `platforms` de `build-tokens.mjs`. Pour une plateforme standard, on copie un bloc et on change trois choses : `transformGroup` (ou `transforms`), `format` et `buildPath`.
-
-| Cible | `transformGroup` | `format` |
-|---|---|---|
-| SCSS | `scss` | `scss/variables` |
-| Less | `less` | `less/variables` |
-| TypeScript (types) | `js` | `typescript/es6-declarations` |
-| JSON | `js` | `json/nested` |
-| Flutter (Dart) | `flutter` | `flutter/class.dart` |
-| React Native | `react-native` | `javascript/es6` |
-
-⚠️ Les groupes mobiles fournis (`flutter`, `compose`, `ios-swift`…) convertissent les tailles comme des `rem` (×16). Nos tokens sont en `px` : pour une nouvelle plateforme mobile, s'inspirer des formats maison de `build/` plutôt que des groupes fournis.
-
-**Pour un format sur mesure** (comme `build/kotlin.mjs`) : une fonction reçoit la liste des tokens et renvoie le texte du fichier. On l'enregistre avec `StyleDictionary.registerFormat()`.
-
-**Documentation de référence :**
-- Formats disponibles : https://styledictionary.com/reference/hooks/formats/predefined/
-- Groupes de transformations : https://styledictionary.com/reference/hooks/transform-groups/predefined/
-- Transformations unitaires : https://styledictionary.com/reference/hooks/transforms/predefined/
-- Créer ses propres formats : https://styledictionary.com/reference/hooks/formats/
+Historique des versions : [CHANGELOG.md](CHANGELOG.md).

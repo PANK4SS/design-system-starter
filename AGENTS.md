@@ -1,6 +1,6 @@
 # Guide pour les agents IA qui travaillent sur ce dépôt
 
-Starter réutilisable de design system : **tokens** DTCG (générés pour web, Android, iOS) + **composants React** documentés dans **Storybook**. Lire aussi `README.md`.
+Starter réutilisable de design system : **tokens** DTCG (générés pour web, Android, iOS) + **composants React** documentés dans **Storybook**. La documentation complète est dans `docs/` (commencer par `docs/02-architecture.md`) ; les choix structurants et leurs raisons sont dans `docs/11-decisions.md`.
 
 ## Environnement
 
@@ -31,3 +31,4 @@ Tout passe par **Docker** : il n'y a pas de Node sur la machine. Préfixer chaqu
 - Commits : Conventional Commits (`feat:`, `fix:`, `chore:`, `docs:`, `test:`, `style:`).
 - Une exception à une règle de lint se justifie sur place : `-- raison` après la directive de désactivation.
 - Ne jamais modifier `dist/` (généré).
+- Documentation : mettre à jour le guide concerné de `docs/` avec le code. Diagrammes en Mermaid, sans emoji.

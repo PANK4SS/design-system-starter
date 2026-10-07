@@ -4,8 +4,6 @@ import stylelint from 'stylelint';
 
 /** @typedef {{ severity: 'error' | 'warning', line: number, message: string }} Issue */
 
-const PACKAGE = 'design-system-starter';
-
 // Éléments HTML natifs qu'un composant du design system remplace
 const NATIVE_REPLACEMENTS = {
   button: 'Button (ou IconButton pour une icône seule)',
@@ -52,9 +50,10 @@ export function checkTsx(code, manifest) {
   const issues = [];
   const components = new Map(manifest.components.map((c) => [c.name, c]));
   const exported = new Set([...manifest.exports.values, ...manifest.exports.types]);
+  const pkg = manifest.name; // le nom du paquet vient du manifeste (donc de package.json)
 
   // 1. Imports inventés
-  for (const m of code.matchAll(new RegExp(`import\\s+(type\\s+)?\\{([^}]+)\\}\\s+from\\s+['"]${PACKAGE}['"]`, 'g'))) {
+  for (const m of code.matchAll(new RegExp(`import\\s+(type\\s+)?\\{([^}]+)\\}\\s+from\\s+['"]${pkg}['"]`, 'g'))) {
     for (const raw of m[2].split(',')) {
       const name = raw
         .trim()
@@ -64,7 +63,7 @@ export function checkTsx(code, manifest) {
         issues.push({
           severity: 'error',
           line: lineOf(code, m.index),
-          message: `« ${name} » n'est pas exporté par ${PACKAGE}. Composants disponibles : list_components.`,
+          message: `« ${name} » n'est pas exporté par ${pkg}. Composants disponibles : list_components.`,
         });
       }
     }
