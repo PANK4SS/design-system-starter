@@ -11,7 +11,7 @@ La qualité ne repose pas sur la vigilance : elle est **vérifiée automatiqueme
 | **Oxlint** | `npm run lint` | erreurs React (règles des hooks), erreurs d'accessibilité dans le JSX, imports circulaires |
 | **Prettier** | `npm run format:check` | les différences de style d'écriture |
 | **TypeScript** | `npm run typecheck` | une prop inexistante, un mauvais type |
-| **axe** (Playwright) | `docker compose run --rm a11y` | une violation d'accessibilité dans **une seule** story, en clair ou en sombre |
+| **axe** (Playwright) | `docker compose run --rm a11y` | une violation d'accessibilité dans **une seule** story, ou un contraste insuffisant dans **une seule** page Docs, en clair ou en sombre |
 | Tests du MCP | `npm run test:mcp` | une régression des vérifications de code pour les IA |
 
 `npm run check` enchaîne tests des tokens, lint, formatage et types.
@@ -57,4 +57,4 @@ La version de l'image Playwright doit correspondre **exactement** à celle du pa
 
 ## L'audit d'accessibilité
 
-`scripts/test-a11y.mjs` construit la liste de toutes les stories depuis `storybook-static/index.json`, les ouvre dans Chromium en thème clair puis sombre (quatre onglets en parallèle) et lance [axe](https://github.com/dequelabs/axe-core) sur chacune. Une seule violation fait échouer la commande (code de sortie 1) et affiche la règle, sa gravité et l'élément fautif.
+`scripts/test-a11y.mjs` construit la liste de toutes les stories et de toutes les pages Docs depuis `storybook-static/index.json`, les ouvre dans Chromium en thème clair puis sombre (quatre onglets en parallèle) et lance [axe](https://github.com/dequelabs/axe-core) : toutes les règles sur chaque story, et les contrastes sur chaque page Docs entière, habillage de Storybook compris (tableaux, blocs de code, tableau des props). Une seule violation fait échouer la commande (code de sortie 1) et affiche la règle, sa gravité et l'élément fautif.

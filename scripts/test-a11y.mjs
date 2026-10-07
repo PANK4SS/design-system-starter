@@ -1,4 +1,6 @@
-// Audit d'accessibilité de TOUTES les stories, en thème clair et sombre, avec axe.
+// Audit d'accessibilité de TOUTES les stories et de TOUTES les pages Docs, en thème clair et sombre, avec axe.
+// Stories : toutes les règles, sur le composant. Pages Docs : les contrastes de la page entière
+// (l'habillage de Storybook compris : tableaux, blocs de code, tableau des props).
 // Lancer avec : docker compose run --rm a11y   (construit Storybook puis audite)
 // Sort en erreur (code 1) si une seule violation est trouvée.
 import { createServer } from 'node:http';
@@ -34,19 +36,21 @@ await new Promise((resolve) => server.listen(PORT, resolve));
 // ─── Liste des stories ───────────────────────────────────────────────────────
 const index = JSON.parse(await readFile(join(ROOT, 'index.json'), 'utf8'));
 const jobs = Object.values(index.entries)
-  .filter((entry) => entry.type === 'story')
-  .flatMap((entry) => THEMES.map((theme) => ({ id: entry.id, theme })));
+  .filter((entry) => entry.type === 'story' || entry.type === 'docs')
+  .flatMap((entry) => THEMES.map((theme) => ({ id: entry.id, theme, docs: entry.type === 'docs' })));
 
 // ─── Audit ───────────────────────────────────────────────────────────────────
 const browser = await chromium.launch();
 const failures = [];
 let done = 0;
 
-async function audit({ id, theme }, page) {
-  await page.goto(`http://localhost:${PORT}/iframe.html?id=${id}&viewMode=story&globals=theme:${theme}`);
-  await page.waitForSelector('#storybook-root > *', { state: 'attached', timeout: 15000 });
-  await page.waitForTimeout(300); // laisse les animations d'entrée se terminer
-  const { violations } = await new AxeBuilder({ page }).include('#storybook-root').analyze();
+async function audit({ id, theme, docs }, page) {
+  const mode = docs ? 'docs' : 'story';
+  await page.goto(`http://localhost:${PORT}/iframe.html?id=${id}&viewMode=${mode}&globals=theme:${theme}`);
+  await page.waitForSelector(docs ? '.sbdocs-content' : '#storybook-root > *', { state: 'attached', timeout: 15000 });
+  await page.waitForTimeout(docs ? 800 : 300); // laisse le rendu et les animations d'entrée se terminer
+  const axe = new AxeBuilder({ page });
+  const { violations } = await (docs ? axe.withRules(['color-contrast']) : axe.include('#storybook-root')).analyze();
   for (const v of violations) {
     failures.push(`${id} [${theme}] ${v.id} (${v.impact}) : ${v.help} — ${v.nodes[0]?.target.join(' ')}`);
   }
@@ -61,7 +65,7 @@ async function worker(queue) {
   await context.close();
 }
 
-console.log(`Audit axe de ${jobs.length} combinaisons story × thème…`);
+console.log(`Audit axe de ${jobs.length} combinaisons (stories et pages Docs) × thème…`);
 const queue = [...jobs];
 await Promise.all(Array.from({ length: CONCURRENCY }, () => worker(queue)));
 await browser.close();
