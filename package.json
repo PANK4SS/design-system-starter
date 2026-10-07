@@ -1,6 +1,6 @@
 {
   "name": "design-system-starter",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Starter réutilisable de design system : tokens DTCG générés pour le web, Android et iOS",
   "private": true,
   "type": "module",
