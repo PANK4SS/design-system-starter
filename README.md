@@ -17,6 +17,34 @@ flowchart LR
     B --> I["Manifeste IA + MCP"]
 ```
 
+## Aperçu
+
+L'interface Storybook suit le thème choisi dans la barre d'outils, en clair comme en sombre : chaque composant a sa page de documentation (règles « À faire | À éviter », exemple interactif, tableau des props).
+
+| Thème clair | Thème sombre |
+|---|---|
+| ![Page de documentation du composant Button dans Storybook, thème clair](docs/images/storybook-clair.png) | ![Page de documentation du composant Button dans Storybook, thème sombre](docs/images/storybook-sombre.png) |
+
+Quelques composants :
+
+| Boutons | Alertes |
+|---|---|
+| ![Les quatre variantes de Button : primary, secondary, ghost, danger](docs/images/boutons.png) | ![Les quatre variantes d'Alert : information, succès, attention, erreur](docs/images/alertes.png) |
+
+| Indicateurs clés (StatTile) |
+|---|
+| ![Rangée de quatre StatTile avec valeur et évolution](docs/images/kpi.png) |
+
+| Tableau triable (Table) |
+|---|
+| ![Table des incidents de la semaine, triable par colonne](docs/images/tableau.png) |
+
+| Graphique (LineChart, thème sombre) | Modale de confirmation (thème sombre) |
+|---|---|
+| ![LineChart à trois séries sur douze mois, thème sombre](docs/images/graphique.png) | ![Modal de confirmation de suppression, thème sombre](docs/images/modale.png) |
+
+Ces captures sont générées automatiquement depuis Storybook : voir [Démarrage](docs/01-demarrage.md#commandes).
+
 ## Démarrage rapide
 
 Seul **Docker** est nécessaire : Node.js et les outils tournent dans des conteneurs.
@@ -68,5 +96,6 @@ La documentation de chaque composant (props, exemples, règles d'usage) est dans
 | `docker compose run --rm node npm run build` | Tokens, librairie et manifeste IA dans `dist/` |
 | `docker compose run --rm a11y` | Audit d'accessibilité de toutes les stories |
 | `docker compose run --rm node npx changeset` | Décrire une modification pour la prochaine version |
+| `docker compose run --rm a11y sh -c "npm run build:storybook && node scripts/capture-screenshots.mjs"` | Régénérer les captures d'écran du README |
 
 Historique des versions : [CHANGELOG.md](CHANGELOG.md).
