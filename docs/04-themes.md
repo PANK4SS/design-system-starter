@@ -54,7 +54,9 @@ flowchart LR
     THEME["theme.ts<br/>construit avec nos tokens"] --> MGR & DOCS
 ```
 
-L'interface de Storybook est elle-même habillée avec les tokens du design system (`.storybook/theme.ts`). Une modification de `manager.ts` demande un redémarrage de Storybook.
+L'interface de Storybook est elle-même habillée avec les tokens du design system (`.storybook/theme.ts`), et `.storybook/preview.css` remplace les couleurs par défaut que Storybook impose dans les pages Docs (bandes de tableau, puces et blocs de code, interrupteurs du tableau des props). La page Docs est sur le fond `surface` ; chaque aperçu de story garde le fond `page`, celui pour lequel les composants sont conçus. Une modification de `manager.ts` ou de `theme.ts` demande un redémarrage de Storybook.
+
+La couleur d'accent de Storybook (`colorSecondary`) doit respecter deux contraintes en thème sombre : être lisible sur le fond des boutons de la barre d'outils, **et**, assombrie de 18 points de luminosité (fond de l'élément sélectionné de la barre latérale), porter du texte blanc. `blue.300` a été calculé pour satisfaire les deux.
 
 ## Sur mobile
 

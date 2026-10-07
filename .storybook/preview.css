@@ -1,6 +1,57 @@
-/* Fond et texte de la zone d'aperçu, pour que le thème dark se voie vraiment */
+/* Fond et texte de la zone d'aperçu, pour que le thème sombre se voie vraiment */
 body {
   background: var(--color-background-page);
   color: var(--color-text-default);
   font-family: var(--font-family-body);
+}
+
+/*
+ * Pages Docs : Storybook utilise à plusieurs endroits ses propres couleurs par défaut, sans rapport avec
+ * notre palette (bandes de tableau gris-bleu, puces de code presque invisibles en sombre).
+ * On les remplace par nos tokens. La page Docs est sur le fond « surface » ; chaque aperçu de story
+ * garde le fond « page », celui sur lequel les composants sont conçus pour être posés.
+ */
+.sbdocs.sbdocs-wrapper {
+  background: var(--color-background-surface);
+}
+
+.sbdocs .docs-story {
+  background: var(--color-background-page);
+}
+
+/* Tableaux en Markdown (« À faire | À éviter ») */
+.sbdocs.sbdocs-content table tr,
+.sbdocs.sbdocs-content table tr:nth-of-type(2n) {
+  background: var(--color-background-page);
+}
+
+.sbdocs.sbdocs-content table th {
+  background: var(--color-background-surface);
+  color: var(--color-text-default);
+}
+
+.sbdocs.sbdocs-content table th,
+.sbdocs.sbdocs-content table td {
+  border-color: var(--color-border-default);
+  color: var(--color-text-default);
+}
+
+/* Code dans le texte (`primary`, `danger`…) : visible dans les deux thèmes */
+.sbdocs.sbdocs-content :not(pre) > code {
+  border-color: var(--color-border-default);
+  background: var(--color-background-page);
+  color: var(--color-text-default);
+}
+
+/*
+ * Interrupteurs « False / True » du tableau des props : Storybook écrit l'option non choisie
+ * en texte à 50 % d'opacité (3,7:1 en clair, sous le minimum de 4,5:1). On utilise text-subtle.
+ */
+.docblock-argstable label > input[role='switch'] ~ span {
+  color: var(--color-text-subtle);
+}
+
+/* Blocs de code : sur le fond « page », pour garder le contraste de la coloration syntaxique de Storybook */
+.sbdocs .docblock-source {
+  background: var(--color-background-page);
 }

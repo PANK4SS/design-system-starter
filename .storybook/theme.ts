@@ -14,8 +14,13 @@ const shared = {
 export const lightTheme = create({
   ...shared,
   base: 'light',
+  // Couleur d'accent de Storybook (liens, clés JSON, sélection) : le bleu « info » de nos tokens
+  colorSecondary: light.ColorFeedbackInfo,
+  // Bouton actif de la barre d'outils (ex. « Sombre ») : lisible sur son fond teinté
+  barSelectedColor: light.ColorFeedbackInfo,
+  barHoverColor: light.ColorFeedbackInfo,
   appBg: light.ColorBackgroundSurface,
-  appContentBg: light.ColorBackgroundPage,
+  appContentBg: light.ColorBackgroundSurface,
   appPreviewBg: light.ColorBackgroundPage,
   appBorderColor: light.ColorBorderDefault,
   textColor: light.ColorTextDefault,
@@ -24,13 +29,21 @@ export const lightTheme = create({
   inputBg: light.ColorBackgroundPage,
   inputBorder: light.ColorBorderStrong,
   inputTextColor: light.ColorTextDefault,
+  // Interrupteurs « True / False » du tableau des props
+  booleanBg: light.ColorBackgroundSurface,
+  booleanSelectedBg: light.ColorBackgroundPage,
 });
 
 export const darkTheme = create({
   ...shared,
   base: 'dark',
+  // Couleur d'accent de Storybook (liens, clés JSON, sélection) : le bleu « info » de nos tokens
+  colorSecondary: dark.ColorFeedbackInfo,
+  // Bouton actif de la barre d'outils (ex. « Sombre ») : lisible sur son fond teinté
+  barSelectedColor: dark.ColorTextDefault,
+  barHoverColor: dark.ColorTextDefault,
   appBg: dark.ColorBackgroundSurface,
-  appContentBg: dark.ColorBackgroundPage,
+  appContentBg: dark.ColorBackgroundSurface,
   appPreviewBg: dark.ColorBackgroundPage,
   appBorderColor: dark.ColorBorderDefault,
   textColor: dark.ColorTextDefault,
@@ -39,4 +52,7 @@ export const darkTheme = create({
   inputBg: dark.ColorBackgroundSurface,
   inputBorder: dark.ColorBorderStrong,
   inputTextColor: dark.ColorTextDefault,
+  // Interrupteurs « True / False » du tableau des props
+  booleanBg: dark.ColorBackgroundSurface,
+  booleanSelectedBg: dark.ColorBackgroundPage,
 });
